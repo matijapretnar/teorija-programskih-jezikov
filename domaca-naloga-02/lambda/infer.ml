@@ -42,6 +42,38 @@ let rec infer_exp ctx = function
       and a = fresh_ty ()
       in
       a, [(t1, S.ArrowTy (t2, a))] @ eqs1 @ eqs2
+  | S.Pair (e1, e2) ->
+      let t1, eqs1 = infer_exp ctx e1
+      and t2, eqs2 = infer_exp ctx e2
+	  in 
+	  (t1, t2), eqs1 @ eqs2
+  | S.Fst e ->
+      let t1, eqs1 = infer_exp ctx e1 in
+	  let a = fresh_ty () in
+	  let b = fresh_ty ()
+	  in
+	  a,[(t1,(a, b))] @ eqs1
+  | S.Snd e ->
+      let t1, eqs1 = infer_exp ctx e1 in
+	  let a = fresh_ty () in
+	  let b = fresh_ty ()
+	  in
+	  b,[(t1,(a, b))] @ eqs1
+  | S.Nil ->
+      let a = fresh_ty () in
+	  S.ListTy a, []
+  | S.Cons (e1, e2) ->
+      let t1, eqs1 = infer_exp ctx e1
+      and t2, eqs2 = infer_exp ctx e2
+	  in
+	  S.ListTy t1, [(t2,S.ListTy t1)] @ eqs1 @ eqs2
+  | S.Match (e, e1, x, xs, e2) ->
+      let t, eqs = infer_exp ctx e in
+      let t1, eqs1 = infer_exp ctx e1 in
+	  let a = fresh_ty () in
+	  let ctx' = (x, a) ::(xs, S.ListTy a) ::ctx in
+      let t2, eqs2 = infer_exp ctx' e2 in
+	  t1, (t1, t2) :: (t, S.ListTy a) :: (eqs @ eqs1 @ eqs2)
 
 
 
