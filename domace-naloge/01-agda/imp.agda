@@ -178,4 +178,4 @@ evalCmd zero st (WHILE bexp DO cmd DONE) = st
 
 -- Pozor: tip funkcije ima smisel zgolj za osnovni tip rezultata
 vsotaPrvihN : Nat → Nat
-vsotaPrvihN n = (evalCmd 125 ( 0 :: (0 :: (0 :: []))) (vsota n)) [ 0 / 2 ]
+vsotaPrvihN n = (evalCmd 125 ( 0 :: (0 :: (0 :: []))) (vsota n)) [ 2 / 0 ]
