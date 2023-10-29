@@ -91,6 +91,7 @@ data Exp (n : Nat) : Set where
     _*_ : Exp n → Exp n → Exp n
 
 data BExp (n : Nat) : Set where
+    𝔹 : Bool → BExp n
     _≡_ : Exp n → Exp n → BExp n
     _<_ : Exp n → Exp n → BExp n
     _>_ : Exp n → Exp n → BExp n
