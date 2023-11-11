@@ -121,7 +121,7 @@ vsota n =
 -- Program, ki sešteje prvih n naravnih števil s pomočjo for zanke
 -- vsota : Nat → Cmd 3
 -- vsota n = 
---     0 / 2 := ` n ； -- Indeksiramo prvo spremenljivo, in tip vseh možnih spremenljivk povečamo za 2, saj bomo v celotnem programo potrebovali tri spremenljivke
+--     0 / 2 := ` n + ` 1 ； -- Indeksiramo prvo spremenljivo, in tip vseh možnih spremenljivk povečamo za 2, saj bomo v celotnem programo potrebovali tri spremenljivke
 --     1 / 1 := ` 0 ；
 --     2 / 0 := ` 0 ；
 --     FOR ( (1 / 1) ) := ` 1 TO ! (0 / 2) DO
