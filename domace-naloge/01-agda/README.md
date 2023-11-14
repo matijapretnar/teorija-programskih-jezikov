@@ -8,7 +8,7 @@ Za domačo nalogo morate:
 
 - Zapolniti vse luknje v obstoječi implementaciji.
 - Dodati potenciranje `_**_`, konjunkcijo `_AND_`, disjunkcijo `_OR_` in negacijo `NOT`. Zaradi lažje implementacije izraz naj bo `0**0` enako 1. 
-- Dodati zanko for oblike `FOR_:=_TO_DO_DONE`, ki sprejme obstoječo lokacijo, dva aritmetična izraza za meji in ukaz, ki naj ga ponavlja. Obnaša naj se čim bolj podobno for zanki v jeziku python oblike `for _ in range(_,_): ...)`
+- Dodati zanko for oblike `FOR_:=_TO_DO_DONE`, ki sprejme obstoječo lokacijo, dva aritmetična izraza za meji in ukaz, ki naj ga ponavlja. Obnaša naj se čim bolj podobno zanki for v jeziku OCaml, ki je oblike `for _ = _ to _ do _ done`
 - Dodati izpisovanje števil `PRINT`, ki ga modelirajte tako, da izvajanje ukazov poleg stanja vrne še seznam izpisanih števil.
 - Izvajanje ukazov popraviti tako, da se bo iz rezultata videlo, ali se je izvajanje uspešno zaključilo ali je vmes zmanjkalo goriva. V priloženi implementaciji imate naveden primer ustreznega tipa, ki ga lahko uporabite, lahko pa napišete tudi svoj tip.
 
