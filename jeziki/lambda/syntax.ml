@@ -13,18 +13,17 @@ let rec subst_exp sbst = function
 
 let string_of_ident (Ident x) = x
 
-let rec string_of_exp3 = function
-  | Lambda (x, e) -> "\\" ^ string_of_ident x ^ ". " ^ string_of_exp3 e
-  | e -> string_of_exp2 e
+let rec string_of_exp2 = function
+  | Lambda (x, e) -> "\\" ^ string_of_ident x ^ ". " ^ string_of_exp2 e
+  | e -> string_of_exp1 e
 
-and string_of_exp2 = function e -> string_of_exp1 e
 
 and string_of_exp1 = function
-  | Apply (e1, e2) -> string_of_exp0 e1 ^ " " ^ string_of_exp0 e2
+  | Apply (e1, e2) -> string_of_exp1 e1 ^ " " ^ string_of_exp0 e2
   | e -> string_of_exp0 e
 
 and string_of_exp0 = function
   | Var x -> string_of_ident x
-  | e -> "(" ^ string_of_exp3 e ^ ")"
+  | e -> "(" ^ string_of_exp2 e ^ ")"
 
-let string_of_exp = string_of_exp3
+let string_of_exp = string_of_exp2

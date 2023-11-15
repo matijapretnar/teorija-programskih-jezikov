@@ -4,16 +4,17 @@ let read_source filename =
   close_in channel;
   source
 
-let main () =
-  if Array.length Sys.argv <> 2 then
-    failwith ("Run LAMBDA as '" ^ Sys.argv.(0) ^ " <filename>.lam'")
-  else
-    let filename = Sys.argv.(1) in
+let () =
+  match Array.to_list Sys.argv with
+  | [ _lambda; filename ] ->
     let source = read_source filename in
     let e = Parser.parse source in
     print_endline "MALI KORAKI:";
     Interpreter.small_step e;
     print_endline "VELIKI KORAKI:";
     Interpreter.big_step e
-
-let _ = main ()
+  | _ ->
+      let lambda = Sys.executable_name in
+      failwith
+        (Printf.sprintf
+           "Run LAMBDA as '%s <filename>.lam'" lambda)
