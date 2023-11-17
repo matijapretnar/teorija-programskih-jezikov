@@ -13,11 +13,12 @@ LET prvi = \p. p (\x. \y. x) IN
 LET drugi = \p. p (\x. \y. y) IN
 LET korak = \f. \p. par (drugi p) (f (drugi p)) IN
 LET predhodnik = \n. prvi (n (korak naslednik) (par nic nic)) IN
-LET ipsilon = \f. (\x. f (x x)) (\x. f (x x)) IN
 LET true = \x. \y. x IN
 LET false = \x. \y. y IN
 LET ifthenelse = \b. \x. \y. b x y IN
 LET jenic = \n. n (\x. false) true IN
-LET psi = \g. \n. ifthenelse (jenic n) ena (krat n (g (predhodnik n))) IN
-LET neumna = \n. dva IN
-normaliziraj (psi (psi (psi (psi neumna))) (naslednik dva))
+LET psiodfakultete = \g. \n. ifthenelse (jenic n) ena (\f. \x. (krat n (g (predhodnik n))) f x) IN
+LET definitivnonefakulteta = \n. sedem IN
+LET ipsilon = \psi. (\f. \x. (psi (f f)) x) (\f. \x. (psi (f f)) x) IN
+LET fakulteta = \n. (ipsilon psiodfakultete) n IN
+normaliziraj (fakulteta (naslednik stiri))
