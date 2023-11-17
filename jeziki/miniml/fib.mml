@@ -3,4 +3,11 @@ LET REC fib n =
     ELSE IF n = 1 THEN 1
     ELSE fib (n - 1) + fib (n - 2)
 IN
-fib 10
+LET fastfib = FUN n ->
+    LET REC aux m = FUN a -> FUN b ->
+        IF m = 0 THEN a
+        ELSE aux (m - 1) b (a + b)
+    IN
+    aux n 0 1
+IN
+fastfib 10
