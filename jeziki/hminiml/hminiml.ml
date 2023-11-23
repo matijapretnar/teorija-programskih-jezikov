@@ -4,35 +4,19 @@ let read_source filename =
   close_in channel;
   source
 
-let main () =
-  if Array.length Sys.argv <> 2 then
-    failwith ("Run HMINIML as '" ^ Sys.argv.(0) ^ " <filename>.hml'")
-  else
-    let filename = Sys.argv.(1) in
-    let source = read_source filename in
-    let e = Parser.parse source in
-    let ty, eqs = Typechecker.infer_exp [] e in
-    print_string "NESUBSTITUIRANI TIP:";
-    print_endline (Syntax.string_of_ty ty);
-    print_endline "ENAČBE:";
-    List.iter
-      (fun (ty1, ty2) ->
-        print_endline
-          ("- " ^ Syntax.string_of_ty ty1 ^ " = " ^ Syntax.string_of_ty ty2))
-      eqs;
-    let subst = Typechecker.unify eqs in
-    print_endline "REŠITEV:";
-    List.iter
-      (fun (p, ty) ->
-        print_endline
-          ("- " ^ Syntax.string_of_param p ^ " -> " ^ Syntax.string_of_ty ty))
-      subst;
-    print_string "SUBSTITUIRANI TIP:";
-    print_endline (Syntax.string_of_ty (Syntax.subst_ty subst ty))
+let print_header header = Format.printf "%s\n%s\n" header (String.make 80 '=')
 
-(* print_endline "MALI KORAKI:";
-   Interpreter.small_step e;
-   print_endline "VELIKI KORAKI:";
-   Interpreter.big_step e *)
-
-let _ = main ()
+let () =
+  match Array.to_list Sys.argv with
+  | [ _miniml; filename ] ->
+      let source = read_source filename in
+      let e = Parser.parse source in
+      print_header "DOLOČANJE TIPA";
+      Typechecker.check_type e
+      (* print_header "MALI KORAKI";
+         Interpreter.small_step e;
+         print_header "VELIKI KORAKI";
+         Interpreter.big_step e *)
+  | _ ->
+      let hminiml = Sys.executable_name in
+      failwith (Printf.sprintf "Run HMINIML as '%s <filename>.lam'" hminiml)
