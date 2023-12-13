@@ -56,3 +56,22 @@ let rec unify = function
       failwith
         ("Cannot unify types " ^ string_of_ty ty1 ^ " and " ^ string_of_ty ty2
        ^ ".")
+
+let check_type e =
+  let ty, eqs = infer_exp [] e in
+  Format.printf "NESUBSTITUIRANI TIP: %s\n" (Syntax.string_of_ty ty);
+  print_endline "ENAČBE:";
+  List.iter
+    (fun (ty1, ty2) ->
+      Format.printf "- %s = %s\n" (Syntax.string_of_ty ty1)
+        (Syntax.string_of_ty ty2))
+    eqs;
+  let subst = unify eqs in
+  print_endline "REŠITEV:";
+  List.iter
+    (fun (p, ty) ->
+      Format.printf "- %s -> %s\n" (Syntax.string_of_param p)
+        (Syntax.string_of_ty ty))
+    subst;
+  let ty' = Syntax.subst_ty subst ty in
+  Format.printf "SUBSTITUIRANI TIP: %s\n" (Syntax.string_of_ty ty')

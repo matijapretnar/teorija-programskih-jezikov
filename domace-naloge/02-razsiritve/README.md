@@ -7,12 +7,12 @@ Cilj domače naloge so izključno razširitve jezika, zato pri karkšnihkoli pro
 Za pomoč pri pisanju naloge je nekaj primerov uporabe novih konstruktov že podanih, predalgamo pa, da dodate tudi svoje.
 
 ### Izgradnja
-Za izgradnjo jezika v konzoli pojdite do mape `domaca-naloga-02/miniml` in v njej poženite `dune build`.
+Za izgradnjo jezika v konzoli pojdite do mape `domace-naloge/02-razsiritve/miniml` in v njej poženite `dune build`.
 
 Če na računalniku nimate nameščenega orodja dune, lahko program prevedete tudi z
 
 ```
-ocamlc -g syntax.ml parser.ml interpreter.ml interpreterLazy.ml typechecker.ml miniml.ml -O2 -o miniml.exe
+ocamlc -g syntax.ml parser.ml interpreter.ml interpreterLazy.ml typechecker.ml miniml.ml -o miniml.exe
 ```
 
 Če ste si OCaml namestili na sistemu Windows s pomočjo `fdopen` namesto `ocamlc` uporabite (kjer pot do ocamlc ustrezno zamenjate z veljavno potjo na vašem računalniku):
