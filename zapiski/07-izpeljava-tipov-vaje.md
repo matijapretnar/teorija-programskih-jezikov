@@ -33,12 +33,81 @@ Preverite, ali vrstni red enačb vpliva na rezultat. Ugotovite kje se pojavi pro
 
 ## Naloga 2
 
-Algoritem za izpeljavo tipov dopolnite za:
+**Algoritem za izpeljavo tipov dopolnite za: rekurzijo, pare, vsote in sezname.**
 
-1. rekurzijo
-2. pare
-3. vsote
-4. sezname
+Kot pri dodajanju novih pravil za tipe moramo za vsak nov sintaktični konstrukt dodati pravilo za izpeljavo tipa in dodatne enačbe.
+Glede na dodajanje novih enačb moramo tudi posodobiti pravila za reševanje sistema enačb.
+
+$$
+
+    \infer{
+        \Gamma, f : \alpha \to \beta, x : \alpha \vdash M : B \mid \eqs
+    }{
+        \Gamma \vdash \kwdpre{rec} f \, x . M : \alpha \to \beta \mid \alpha = A, \beta  = B, \eqs
+    }
+
+    \infer{\Gamma \vdash M_1 : A_1 \mid \eqs_q \qquad \Gamma \vdash M_2 : A_2 \mid \eqs_2}{\Gamma \vdash (M_1, M_2) : \alpha_1 \times \alpha_2 \mid \alpha_1 = A_1, \alpha_2 = A_2, \eqs_1, \eqs_2}
+
+    \infer{\Gamma \vdash M : A_1 \times A_2 \mid \eqs}{\Gamma \vdash \fst M : A \mid A = A_1, \eqs}
+
+    \infer{\Gamma \vdash M : A_1 \times A_2 \mid \eqs}{\Gamma \vdash \snd M : A \mid A = A_2, \eqs}
+
+    \infer{\Gamma \vdash M : A_1 \mid \eqs}{\Gamma \vdash \inl M : A \mid A = A_1 + \alpha, \eqs}
+
+    \infer{\Gamma \vdash M : A_2 \mid \eqs}{\Gamma \vdash \inr M : A \mid A = \alpha + A_2, \eqs}
+
+    \infer{\Gamma \vdash M : A_1 + A_2 \mid \eqs \qquad \Gamma, x_1 : \alpha_1 \vdash M_1 : B_1 \mid \eqs_1 \qquad \Gamma, x_2 : \alpha_2 \vdash M_2 : B_2 \mid \eqs_2}{\Gamma \vdash \matchsum{M}{x_1}{M_1}{x_2}{M_2} : \beta \mid \beta = B_1, \beta = B_2, \alpha_1 = A_1, \alpha_2 = A_2, \eqs, \eqs_1, \eqs_2}
+
+    \infer{}{\Gamma \vdash [] : \kwdpre{list} \alpha \mid \emptyset}
+
+    \infer{\Gamma \vdash M_1 : A_1 \mid \eqs_1  \qquad \Gamma \vdash M_2 : A_2 \mid \eqs_2}{\Gamma \vdash M_1 :: M_2 : \alpha \mid \alpha = \kwdpre{list} A_1, \alpha = A_2, \eqs_1, \eqs_2}
+
+    \infer{\Gamma \vdash M : A \mid \eqs_1 \qquad \Gamma \vdash M_1 : A_1 \mid \eqs_2 \qquad \Gamma, x_1 : \alpha_1, x_2 : \alpha_2 \vdash M_2 : A_2 \mid \eqs_3}{\Gamma \vdash \matchlist{M}{M_1}{x_1}{x_2}{M_2} : \alpha \mid \alpha = A_1, \alpha = A_2, A = \kwdpre{list} \alpha_1, A = \alpha_2, \eqs_1, \eqs_2, \eqs_3}
+$$
+
+Možnosti za dodajanje pravil je več, pri nekaterih lahko že nekoliko rešimo enačbe, lahko pa sestavimo bolj splošna pravila in reševanje enačb prepustimo algoritmu za reševanje.
+Vseeno pa je treba biti pozoren, napačno pravilo za konstrukcijo seznama bi namreč bilo
+
+$$
+    \infer{\Gamma \vdash M_1 : A_1 \mid \eqs_1  \qquad \Gamma \vdash M_2 : \kwdpre{list} A_2 \mid \eqs_2}{\Gamma \vdash M_1 :: M_2 : \alpha \mid \alpha = \kwdpre{list} A_1, \alpha = \kwdpre{list} A_2, \eqs_1, \eqs_2}
+$$
+
+saj bi v primeru konstrukcije seznama `1 :: []` za tip `[]` dobili $\alpha'$, ki pa ni oblike $\kwdpre{list} A$ in tipa ne bi mogli izpeljati.
+
+Dodatna pravila za reševanje enačb so potrebna zato, da lahko razrešimo nove oblike tipov, ki smo jih uvedli.
+
+$$
+\infer{
+  A_1 = B_1, A_2 = B_2, \eqs \searrow \sigma
+}{
+  A_1 \times A_2 = B_1 \times B_2, \eqs \searrow \sigma
+}\\[2em]
+
+\infer{
+  A_1 = B_1, A_2 = B_2, \eqs \searrow \sigma
+}{
+  A_1 + A_2 = B_1 + B_2, \eqs \searrow \sigma
+}\\[2em]
+
+\infer{
+  A = B, \eqs \searrow \sigma
+}{
+  \kwdpre{list} A = \kwdpre{list} B, \eqs \searrow \sigma
+}
+$$
+
+Posodobiti pa moramo tudi funkcijo $fv$ kot
+
+$$
+  fv(A_1 \times A_2) = fv(A_1) \cup fv(A_2) \qquad fv(A_1 + A_2) = fv(A_1) \cup fv(A_2) \qquad fv(\kwdpre{list} A) = fv(A)
+$$
+
+Z dodajanjem novih oblik tipov je vedno več enačb "nerešljivih", saj nimajo ujemajočih oblik.
+
+
+
+
+
 
 ## Naloga 3
 

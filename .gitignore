@@ -9,3 +9,8 @@ _build
 *.synctex.gz
 .merlin
 *.agdai
+
+*.cmi
+*.cmo
+
+venv/

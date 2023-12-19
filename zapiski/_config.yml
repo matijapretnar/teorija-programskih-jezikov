@@ -21,6 +21,14 @@ sphinx:
           "ifthenelse": ["\\kwdpre{if} #1 \\kwdmid{then} #2 \\kwdmid{else} #3", 3]
           "whiledo": ["\\kwdpre{while} #1 \\kwdmid{do} #2", 2]
           "skip": "\\kwd{skip}"
+          "fst": "\\kwdpre{fst}"
+          "snd": "\\kwdpre{snd}"
+          "inl": "\\kwdpre{inl}"
+          "inr": "\\kwdpre{inr}"
+          "match": "\\kwdpre{match}"
+          "with": "\\kwdmid{with}"
+          "matchsum": ["\\match #1 \\with \\inl #2 \\mapsto #3 \\; \\inr #4 \\mapsto #5", 5]
+          "matchlist": ["\\match #1 \\with [] \\mapsto #2 \\; #3 :: #4 \\mapsto #5", 5]
           "ttt": "t\\!t"
           "fff": "f\\!\\!f"
           "infer": ["\\displaystyle{\\frac{#1}{#2}}", 2]
