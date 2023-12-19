@@ -410,7 +410,7 @@ Z indukcijo na predpostavko o koraku.
 
 $$
 \infer{
-    \Gamma, f : A \to B, x : A \vdash M : A \to B
+    \Gamma, f : A \to B, x : A \vdash M : B
 }{
     \Gamma \vdash \kwdpre{rec} f \, x . M : A \to B
 }
