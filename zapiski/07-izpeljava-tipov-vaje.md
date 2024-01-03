@@ -48,15 +48,15 @@ $$
 
     \infer{\Gamma \vdash M_1 : A_1 \mid \eqs_q \qquad \Gamma \vdash M_2 : A_2 \mid \eqs_2}{\Gamma \vdash (M_1, M_2) : \alpha_1 \times \alpha_2 \mid \alpha_1 = A_1, \alpha_2 = A_2, \eqs_1, \eqs_2}
 
-    \infer{\Gamma \vdash M : A_1 \times A_2 \mid \eqs}{\Gamma \vdash \fst M : A \mid A = A_1, \eqs}
+    \infer{\Gamma \vdash M : A \mid \eqs}{\Gamma \vdash \fst M : \alpha_1 \mid \alpha_1 \times \alpha_2 = A, \eqs}
 
-    \infer{\Gamma \vdash M : A_1 \times A_2 \mid \eqs}{\Gamma \vdash \snd M : A \mid A = A_2, \eqs}
+    \infer{\Gamma \vdash M : A \mid \eqs}{\Gamma \vdash \fst M : \alpha_2 \mid \alpha_1 \times \alpha_2 = A, \eqs}
 
-    \infer{\Gamma \vdash M : A_1 \mid \eqs}{\Gamma \vdash \inl M : A \mid A = A_1 + \alpha, \eqs}
+    \infer{\Gamma \vdash M : A_1 \mid \eqs}{\Gamma \vdash \inl M : \alpha \mid \alpha = A_1 + \alpha_2, \eqs}
 
-    \infer{\Gamma \vdash M : A_2 \mid \eqs}{\Gamma \vdash \inr M : A \mid A = \alpha + A_2, \eqs}
+    \infer{\Gamma \vdash M : A_2 \mid \eqs}{\Gamma \vdash \inr M : \alpha \mid \alpha = \alpha_1 + A_2, \eqs}
 
-    \infer{\Gamma \vdash M : A_1 + A_2 \mid \eqs \qquad \Gamma, x_1 : \alpha_1 \vdash M_1 : B_1 \mid \eqs_1 \qquad \Gamma, x_2 : \alpha_2 \vdash M_2 : B_2 \mid \eqs_2}{\Gamma \vdash \matchsum{M}{x_1}{M_1}{x_2}{M_2} : \beta \mid \beta = B_1, \beta = B_2, \alpha_1 = A_1, \alpha_2 = A_2, \eqs, \eqs_1, \eqs_2}
+    \infer{\Gamma \vdash M : A \mid \eqs \qquad \Gamma, x_1 : \alpha_1 \vdash M_1 : B_1 \mid \eqs_1 \qquad \Gamma, x_2 : \alpha_2 \vdash M_2 : B_2 \mid \eqs_2}{\Gamma \vdash \matchsum{M}{x_1}{M_1}{x_2}{M_2} : \beta \mid \beta = B_1, \beta = B_2, \alpha_1 + \alpha_2 = A, \eqs, \eqs_1, \eqs_2}
 
     \infer{}{\Gamma \vdash [] : \kwdpre{list} \alpha \mid \emptyset}
 
