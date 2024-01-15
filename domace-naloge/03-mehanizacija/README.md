@@ -1,16 +1,8 @@
 # NAVODILA ZA TRETJO DOMAČO NALOGO
 
-Naloga obsega razširitev sistema tipov jezika Lambda, dopolnitev operacijske semantike in dokaza izreka o varnosti za razširjen sistem tipov ter spremembo v drobnozrnat neučakan jezik.
+V datoteki `stlc-naloga.agda` je podana intrinzična formalizacija jezika, ki smo ga spoznali na predavanjih in vajah. Vaša naloga je formalizacijo prepisati v drobnozrnat neučakan jezik (torej izraze ločiti na vrednosti in izračune) ter zapolniti vse luknje v specifikaciji in dokazih. Operacijska semantika naj podaja neučakano obliko jezika z determinističnim izvajanjem.
 
-## DOPOLNITEV OPERACIJSKE SEMANTIKE IN DOKAZA O NAPREDKU (5 točk)
-
-V datoteki `stlc-naloga.agda` je podana intrinzična formalizacija jezika, ki smo ga spoznali na predavanjih in vajah. Vaša naloga je zapolniti luknje v operacijski semantiki in dokazih. Operacijska semantika naj podaja neučakano obliko jezika z determinističnim izvajanjem.
-
-## PREPIS V DROBNOZRNATI NEUČAKAN JEZIK (5 točk)
-
-Formalizacijo jezika spremenite v drobnozrnat neučakan jezik.
-To pomeni, da morate izraze ločiti na vrednosti in izračune, jim ustrezno določiti tipe in podati operacijsko semantiko za izračune.
-Popravite tudi izrek o napredku.
+Celotna naloga je vredna 10 točk. Če samo dopolnite specifikacijo in dokaze v obstoječi obliki, pa dobite 5 točk.
 
 ## ODDAJA
 
