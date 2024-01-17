@@ -164,3 +164,73 @@ Dokaz je zahteven, zato ga bomo izpustili. Lažji pa je dokaz spološnejše posl
 **Izrek.** Če za $\Gamma \vdash M : A$ in $\Gamma \vdash N : A$ velja $\itp{M} = \itp{N}$, potem velja tudi $M \simeq N$.
 
 **Dokaz.** Vzemimo poljuben kontekst $\ctxt$, za katerega velja $\ctxt[M] \leadsto^* \true$. Brez škode za splošnost (čeprav tega nismo dokazali) se lahko omejimo na kontekste, za katere je $\vdash \ctxt[M] : \boolty$, torej je $\itp{\ctxt[M]}$ definirana in po skladnosti z operacijsko semantiko enaka $\itp{\true} = \ttt$. Ker je interpretacija podana strukturno, je vrednost $\itp{\ctxt[M]}$ na tistih mestih, kjer se v $\ctxt$ pojavljajo luknje $[\,]$, odvisna le od $\itp{M}$. Ker je $\itp{M} = \itp{N}$, je torej tudi $\itp{\ctxt[N]} = \itp{\ctxt[M]} = \ttt$. Po zadostnosti torej obstaja zaporedje korakov $\ctxt[N] \leadsto^* \true$, kar smo želeli pokazati. Obrat pokažemo simetrično. ■
+
+Če bi želeli, bi lahko tudi kontekste omejili na take, ki imajo dobro določene tipe. Pri tem moramo upoštevati ne samo zunanji tip konteksta, temveč tudi tip luknje, torej kakšne izraze bomo lahko vstavili v kontekst. Še več, ker se luknje lahko pojavljajo tudi v telesih abstrakcij, jim tipa ne določamo nujno v istem kontekstu spremenljivk $\Gamma$. Na primer, zgornji kontekst $\ctxt_0 = \lambda x. \ifthenelse{x < [\,]}{x}{[\,]}$ je zaprt, saj ne vsebuje prostih spremenljivk in vrne funkcijo tipa $\intty \to \intty$, med tem ko mora biti luknja tipa $\intty$ ob predpostavki $x : \intty$.
+
+Tako definiramo relacijo $\Gamma \vdash \ctxt[\Delta \vdash B] : A$, kjer sta $\Gamma$ in $A$ zunanja, $\Delta$ in $B$ pa notranja kontekst spremenljivk in tip. Na primer, v omenjenem primeru bi imeli $\vdash \ctxt_0[x : \intty \vdash \intty] : \intty \to \intty$. Želimo, da za $\Gamma \vdash \ctxt[\Delta \vdash B] : A$ in $\Delta \vdash M : B$ velja tudi $\Gamma \vdash \ctxt[M] : A$. Relacijo podamo s sledečimi induktivnimi pravili:
+
+$$
+\infer{}{
+    \Gamma \vdash [\,][\Gamma \vdash A] : A
+} \qquad
+
+\infer{
+    (x : A) ∈ \Gamma
+}{
+    \Gamma \vdash x[\Delta \vdash B] : A
+} \qquad
+
+\infer{}{
+    \Gamma \vdash \true[\Delta \vdash B] : \boolty
+} \qquad
+
+\infer{}{
+    \Gamma \vdash \false[\Delta \vdash B] : \boolty
+} \\[2em]
+
+\infer{
+    \Gamma \vdash \ctxt[\Delta \vdash B] : \boolty \qquad
+    \Gamma \vdash \ctxt_1[\Delta \vdash B] : A \qquad
+    \Gamma \vdash \ctxt_2[\Delta \vdash B] : A
+}{
+    \Gamma \vdash \ifthenelse{\ctxt}{\ctxt_1}{\ctxt_2}[\Delta \vdash B] : A
+} \\[2em]
+
+\infer{}{
+    \Gamma \vdash \intsym{n}[\Delta \vdash B] : \intty
+} \qquad
+
+\infer{
+    \Gamma \vdash \ctxt_1[\Delta \vdash B] : \intty \qquad
+    \Gamma \vdash \ctxt_2[\Delta \vdash B] : \intty
+}{
+    \Gamma \vdash (\ctxt_1 + \ctxt_2)[\Delta \vdash B] : \intty
+} \\[2em]
+
+\infer{
+    \Gamma \vdash \ctxt_1[\Delta \vdash B] : \intty \qquad
+    \Gamma \vdash \ctxt_2[\Delta \vdash B] : \intty
+}{
+    \Gamma \vdash (\ctxt_1 * \ctxt_2)[\Delta \vdash B] : \intty
+} \qquad
+
+\infer{
+    \Gamma \vdash \ctxt_1[\Delta \vdash B] : \intty \qquad
+    \Gamma \vdash \ctxt_2[\Delta \vdash B] : \intty
+}{
+    \Gamma \vdash (\ctxt_1 < \ctxt_2)[\Delta \vdash B] : \boolty
+} \\[2em]
+
+\infer{
+    \Gamma, x : A_1 \vdash \ctxt[\Delta \vdash B] : A_2
+}{
+    \Gamma \vdash (\lambda x. \ctxt)[\Delta \vdash B] : A_1 \to A_2
+} \qquad
+
+\infer{
+    \Gamma \vdash \ctxt_1[\Delta \vdash B] : A_1 \to A_2 \qquad
+    \Gamma \vdash \ctxt_2[\Delta \vdash B] : A_1
+}{
+    \Gamma \vdash (\ctxt_1 \, \ctxt_2)[\Delta \vdash B] : A_2
+}
+$$
