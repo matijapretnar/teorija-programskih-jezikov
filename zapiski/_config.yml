@@ -40,4 +40,6 @@ sphinx:
           "return": "\\kwdpre{return}"
           "letin": ["\\kwdpre{let} #1 \\kwdmid{in}", 1]
           "bind": "\\mathop{>\\!\\!\\!>\\!\\!\\!=}"
+          "just": "\\kwdpre{Just}"
+          "nothing": "\\kwdpre{Nothing}"
 

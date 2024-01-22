@@ -31,7 +31,42 @@ kernelspec:
 
 4. Prestreznik `custom_separator sep` naj poskrbi, da se ločeno izpisani tekst ne loči z `\n` temveč separatorjem `sep`.
 
+5. Napišite prestreznik `counter limit`, ki šteje izpise in vrne rezultat, samo, če je bilo izpisanih manj kot `limit` znakov. Če je bilo izpisanih več, naj vrne `None`.
+
+6. Popravite zgornje prestreznike, da bodo ponovno sprožili učinke `Print`, ki ga bo ujel limitni prestreznik.
+
 ## Naloga 2
+
+1. Napišite učinka `Get : unit -> int` in `Put : int -> unit` in program, ki ju smiselno uporablja.
+
+2. Napišite prestreznik `state`, ki program ustrezno implementira učinka `Get` in `Put` v monadični obliki - izračun pretvori v funkcijo, ki sprejme začetno vrednost stanja in vrne rezultat.
+
+
+## Naloga 3
+
+Vzemi drevo, ki ga definira naslednji tip:
+
+```ocaml
+type 'a tree
+ = Empty
+ | Node of tree * 'a * tree
+
+type direction = Left | Right
+```
+
+in učinek `Pick : unit -> direction`.
+
+2. Napišite funkcijo `explore : int tree  -> int`, ki raziskuje drevo in podatke združuje s pomočjo globalne funkcije `op : 'a -> int -> 'a`.
+   Raziskovanje praznega drevesa naj vrne `0`, raziskovanje nepraznega pa naj najprej izvede učinek `Pick` in glede na rezultat izbere levo ali desno poddrevo, nadaljuje raziskovanje tega poddrevesa in vrne rezultat združen z vrednostjo v korenu.
+
+3. Napišite prestreznike in pripadajočo funkcijo `op`, ki glede na funkcijo `explore` vrnejo naslednje rezultate:
+    - Vrednost minimalne poti v drevesu
+    - Vrednost maksimalne poti v drevesu
+    - Število vseh poti v drevesu
+    - Vrednosti vseh poti v drevesu
+    - Povprečno vrednost poti v drevesu
+
+## Naloga 4
 
 Želimo narediti prestreznik za memoizacijo. Že izračunane vrednosti bomo (neučinkovito) hranili v seznamu parov.
 
@@ -45,7 +80,7 @@ kernelspec:
 
 **Namig:** Če želite rekurzivne prestreznike, jih definirajte kot `let rec h () = handler ...` kjer jih lahko sedaj v telesu definicije uporabite z `with h () handle ...`.
 
-## Naloga 3
+## Naloga 5
 
 Generatorji so funkcije, ki zaporedoma uporabljajo učinek `Yield : int -> unit`.
 
