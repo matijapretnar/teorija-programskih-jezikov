@@ -1,0 +1,762 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Vaje &#8212; Teorija programskih jezikov</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"intsym": ["\\underline{#1}", 1], "kwd": ["\\mathbf{#1}", 1], "kwdpre": ["\\kwd{#1}\\;", 1], "kwdmid": ["\\;\\kwd{#1}\\;", 1], "kwdpost": ["\\;\\kwd{#1}", 1], "true": "\\kwd{true}", "false": "\\kwd{false}", "ifthenelse": ["\\kwdpre{if} #1 \\kwdmid{then} #2 \\kwdmid{else} #3", 3], "whiledo": ["\\kwdpre{while} #1 \\kwdmid{do} #2", 2], "skip": "\\kwd{skip}", "fst": "\\kwdpre{fst}", "snd": "\\kwdpre{snd}", "inl": "\\kwdpre{inl}", "inr": "\\kwdpre{inr}", "match": "\\kwdpre{match}", "with": "\\kwdmid{with}", "matchsum": ["\\match #1 \\with \\inl #2 \\mapsto #3 \\; \\inr #4 \\mapsto #5", 5], "matchlist": ["\\match #1 \\with [] \\mapsto #2 \\; #3 :: #4 \\mapsto #5", 5], "ttt": "t\\!t", "fff": "f\\!\\!f", "infer": ["\\displaystyle{\\frac{#1}{#2}}", 2], "boolty": "\\kwd{bool}", "intty": "\\kwd{int}", "eqs": "\\mathcal{E}", "ctxt": "\\mathcal{C}", "itp": ["[\\![ #1 ]\\!]", 1], "return": "\\kwdpre{return}", "letin": ["\\kwdpre{let} #1 \\kwdmid{in}", 1], "bind": "\\mathop{>\\!\\!\\!>\\!\\!\\!=}", "just": "\\kwdpre{Just}", "nothing": "\\kwdpre{Nothing}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-tipi-vaje';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Izpeljava tipov" href="07-izpeljava-tipov.html" />
+    <link rel="prev" title="Tipi" href="06-tipi.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="00-uvod.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Teorija programskih jezikov</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-uvod.html">
+                    Teorija programskih jezikov
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Osnove</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="01-praksa-programskih-jezikov.html">Praksa programskih jezikov</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01-praksa-programskih-jezikov-vaje.html">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03-indukcija.html">Indukcija</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-indukcija-vaje.html">Vaje</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Metateorija</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04-metateorija-programskih-jezikov.html">Metateorija programskih jezikov</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-metateorija-programskih-jezikov-vaje.html">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05-lambda-racun.html">λ-račun</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="05-lambda-racun-vaje.html">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="06-tipi.html">Tipi</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07-izpeljava-tipov.html">Izpeljava tipov</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="07-izpeljava-tipov-vaje.html">Vaje</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Denotacijska semantika</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="10-denotacijska-semantika.html">Denotacijska semantika</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="10-denotacijska-semantika-vaje.html">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="11-domene.html">Domene</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="11-domene-vaje.html">Vaje</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Učinki</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08-racunski-ucinki.html">Računski učinki</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="08-racunski-ucinki-vaje.html">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12-monade.html">Monade</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="12-monade-vaje.html">Vaje</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13-prestrezniki-ucinkov.html">Prestrezniki učinkov</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="13-prestrezniki-ucinkov-vaje.html">Vaje</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/matijapretnar/teorija-programskih-jezikov/zapiski?urlpath=tree/06-tipi-vaje.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/06-tipi-vaje.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="_sources/06-tipi-vaje.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vaje</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-1">Naloga 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-2">Naloga 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-3">Naloga 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-4">Naloga 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-5">Naloga 5</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pari">Pari</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vsote">Vsote</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seznami">Seznami</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leno-izvajanje">Leno izvajanje</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-6">Naloga 6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-7">Naloga 7</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="vaje">
+<h1>Vaje<a class="headerlink" href="#vaje" title="Permalink to this heading">#</a></h1>
+<section id="naloga-1">
+<h2>Naloga 1<a class="headerlink" href="#naloga-1" title="Permalink to this heading">#</a></h2>
+<p><em>S semantiko malih korakov izračunajte zaporedje korakov, ki izračunajo vrednost izrazov:</em></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(2</span> <span class="pre">*</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">(3</span> <span class="pre">*</span> <span class="pre">3)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">then</span> <span class="pre">x</span> <span class="pre">else</span> <span class="pre">0)</span> <span class="pre">12</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(rec</span> <span class="pre">f</span> <span class="pre">x.</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">f</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">1))</span> <span class="pre">3</span></code></p></li>
+</ol>
+</section>
+<section id="naloga-2">
+<h2>Naloga 2<a class="headerlink" href="#naloga-2" title="Permalink to this heading">#</a></h2>
+<p>Zgornja operacijska semantika sledi neučakanemu izvajanju, saj pri uporabi funkcije najprej izračunamo vrednost argumenta in dobljeno vrednost substituiramo v telo funkcije. Pri lenem izvajanju pa pri uporabi funkcije argument še neizračunan substituiramo v telo funkcije. Popravite semantiko na leno izvajanje (potrebno je spremeniti zgolj pravila za aplikacijo funkcij) ter primerjajte izvajanje na primerih:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">(fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">then</span> <span class="pre">y</span> <span class="pre">else</span> <span class="pre">0))</span> <span class="pre">1</span> <span class="pre">(4*((4+2)*3))</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">(x</span> <span class="pre">*</span> <span class="pre">x)</span> <span class="pre">+</span> <span class="pre">x)</span> <span class="pre">(3*(2+(4*0)))</span></code></p></li>
+</ol>
+</section>
+<section id="naloga-3">
+<h2>Naloga 3<a class="headerlink" href="#naloga-3" title="Permalink to this heading">#</a></h2>
+<p><em>Preverite tipe izrazov. Izrazi morda nimajo primernega tipa. V tem primeru poiščite mesto, kjer se postopek zatakne.</em></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">b:bool,</span> <span class="pre">x:int</span> <span class="pre">|-</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">(if</span> <span class="pre">b</span> <span class="pre">then</span> <span class="pre">2</span> <span class="pre">else</span> <span class="pre">x)</span> <span class="pre">:</span> <span class="pre">int</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">|-</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">(fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y)</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">|-</span> <span class="pre">(rec</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">then</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">else</span> <span class="pre">0)</span> <span class="pre">true</span> <span class="pre">:</span> <span class="pre">int</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">|-</span> <span class="pre">(f</span> <span class="pre">3)</span> <span class="pre">&gt;</span> <span class="pre">(f</span> <span class="pre">(f</span> <span class="pre">0))</span> <span class="pre">2</span> <span class="pre">:</span> <span class="pre">bool</span></code></p></li>
+</ol>
+</section>
+<section id="naloga-4">
+<h2>Naloga 4<a class="headerlink" href="#naloga-4" title="Permalink to this heading">#</a></h2>
+<p>Napišite nekaj izrazov, katerim ni možno dodeliti tipa, vendar se izračunajo v vrednost.</p>
+</section>
+<section id="naloga-5">
+<h2>Naloga 5<a class="headerlink" href="#naloga-5" title="Permalink to this heading">#</a></h2>
+<p><strong>Razširite jezik in sistem tipov s pari, seznami in vsotami. Za pare dodajte projekciji na posamezno komponento, za sezname in vsote pa dodajte razgrajevalnik <code class="docutils literal notranslate"><span class="pre">match</span></code>.</strong></p>
+<p><strong>Kot dodaten izziv premislite, kako razširitve narediti v lenem izvajanju in napišite funkcijo, ki zgradi neskončen seznam ničel.</strong></p>
+<p>Če nas ne zanima obnašanje jezika na zahtevnejših konstruktih (pri tem predmetu nas običajno ne), je jezik iz predavanj že povsem dovolj.
+Je pa za praktično uporabo mnogo preveč okoren.
+Naprednejše podatkovne tipe sicer lahko zakodiramo z osnovnimi konstrukti v lambda računu, vendar je to zelo nepraktično in tudi neučinkovito.
+Prav tako nam vgrajene zmožnosti konstruktov (pari, seznami) omogočajo, da smo že med prevajanjem bolj učinkoviti, če recimo jezik ali tarčno okolje, v katerem pišemo prevajalnik ali tolmač omogočajo učinkovitejšo implementacijo.</p>
+<p>Dodajanje parov (produktinih tipov) in vsot je enostavnejše, če se smemo omejiti na zgolj dva argumenta, vendar pravil ni težko razširiti tudi na poljubno število argumentov.</p>
+<p>Pri dodajanju novh konstruktov (parov) načeloma postopamo po ustaljenem kopitu</p>
+<ol class="arabic simple">
+<li><p>Dodamo sintaktične konstrukte.</p></li>
+<li><p>Dodamo možnost za konstruiranje para iz že obstoječih izrazov.</p></li>
+<li><p>Dodamo možnost razgradnjo (uporabo) para.</p></li>
+<li><p>Dodamo nove vrednosti (če se pojavijo)</p></li>
+<li><p>Dodamo tip (če je potrebno).</p></li>
+<li><p>Za vsak nov sintaktični konstrukt dodamo pravilo za določitev tipa.</p></li>
+<li><p>Dodamo nova pravila za izvajanje.</p></li>
+</ol>
+<section id="pari">
+<h3>Pari<a class="headerlink" href="#pari" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+    \begin{align*}
+    \text{izraz } M &amp;::= ...
+        \mid (M_1, M_2) \mid \fst M \mid \snd M
+    \end{align*}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \begin{align*}
+    \text{tip } A,B &amp;::= ...
+         \mid A_1 \times A_2
+    \end{align*}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \text{vrednost } V ::= ... \mid (V_1, V_2)
+\]</div>
+<p>Prvi konstrukt konstruira par iz že obstoječih izrazov, druga dva pa par ustrezno razgradita, nove vrednosti pa so seveda pari že obstoječih vrednosti. Tip para je produkt tipov komponent.</p>
+<p>Za vsak nov konstrukt moramo dodati pravilo za določitev tipa in pravilo (potencialno več) za izvajanje.</p>
+<p>Določitev tipa je preprosta, ob poznavanju tipov komponent, tip para ni nič drugega kot produkt tipov komponent.
+Pri razgradnji pa moramo upoštevati, da je tip para produkt tipov komponent, zato moramo pri razgradnji ustrezno razgraditi tudi tip.
+Komponenta tipa, ki je ne uporabimo, je lahko poljubna.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{\Gamma \vdash M_1 : A_1 \qquad \Gamma \vdash M_2 : A_2}{\Gamma \vdash (M_1, M_2) : A_1 \times A_2}\\    \infer{\Gamma \vdash M : A_1 \times A_2}{\Gamma \vdash \fst M : A_1}\\    \infer{\Gamma \vdash M : A_1 \times A_2}{\Gamma \vdash \snd M : A_2}
+\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{M_1 \leadsto M_1'}{(M_1, M_2) \leadsto (M_1', M_2)}
+    
+    \infer{M_2 \leadsto M_2'}{(V_1, M_2) \leadsto (V_1, M_2')}\\    \infer{M \leadsto M'}{\fst M \leadsto \fst M'}\\    \infer{M \leadsto M'}{\snd M \leadsto \snd M'}\\    \infer{}{\fst (V_1, V_2) \leadsto V_1}\\    \infer{}{\snd (V_1, V_2) \leadsto V_2}
+\end{aligned}\end{align} \]</div>
+<p>Pravila za izvajanje so preprosta, par izvajamo po vrsti, dokler ne pridemo do vrednosti, pri razgradnji pa najprej izvajamo <em>argument</em> in ga, ko postne vrednost razgradimo.
+Pravila za izvajanje komponent postavimo na tak način, da je izvajanje deterministično - najprej izvajamo prvo komponento, nato drugo.
+Če je jezik čist (brez stranskih učinkov), bi lahko najprej izvajali tudi drugo komponento.</p>
+<p>Za posodobite izreka o napredku je ključen podatek, da je edina vrednost, ki ima tip <span class="math notranslate nohighlight">\(A_1 \times A_2\)</span> oblike <span class="math notranslate nohighlight">\((V_1, V_2)\)</span>, in torej lahko vrednost s tipom para vedno razgradimo (tako imenovana lema o kanoničnih oblikah).</p>
+<p>Ker je podajanje izrazov in tupov rekurzivno (najmanjša za pravila zaprta relacija), lahko z dovolj globokim gnezdenjem parov, skonstruiramo izraz, ki je izomorfen poljubni n-terici v OCamlu.</p>
+<!-- TODO: splošno pravilo za tuple>
+<!-- https://hackage.haskell.org/package/base-4.19.0.0/docs/src/GHC.Show.html#line-263 -->
+</section>
+<section id="vsote">
+<h3>Vsote<a class="headerlink" href="#vsote" title="Permalink to this heading">#</a></h3>
+<p>Vsotni (variantni) tipo predstavljajo pojavitev enega izmed dveh različnih tipov pod <em>eno streho</em> in jih običajno modeliramo z disjunktnimi unijami (koprodukti).
+V OCamlu jih lahko definiramo z <code class="docutils literal notranslate"><span class="pre">type</span></code> in pripadajočimi konstruktorji.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">int_bool_either</span> <span class="o">=</span> <span class="nc">Left</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">|</span> <span class="nc">Right</span> <span class="k">of</span> <span class="kt">bool</span>
+</pre></div>
+</div>
+<p>S tem smo definirali nov tip <code class="docutils literal notranslate"> <span class="pre">int_bool_either</span></code>, ki ima dva konstruktorja <code class="docutils literal notranslate"><span class="pre">Left</span></code> in <code class="docutils literal notranslate"><span class="pre">Right</span></code>, vsak izmed njiju <em>vloži</em> <code class="docutils literal notranslate"><span class="pre">int</span></code> oz. <code class="docutils literal notranslate"><span class="pre">bool</span></code> v skupni tip.</p>
+<p>V naš jezik ne bomo dodali možnosti definiraja poljubnega tipa in pripadajočih konstruktorjev, ampak se bomo zadovoljili z vgrajenimi konstruktorji <code class="docutils literal notranslate"><span class="pre">INL</span></code> in <code class="docutils literal notranslate"><span class="pre">INR</span></code> za vgrajeni vsotni tip.</p>
+<div class="math notranslate nohighlight">
+\[
+    \begin{align*}
+    \text{izraz } M &amp;::= ...
+        \mid \inl M \mid \inr M \mid \matchsum{M}{x_1}{M_1}{x_2}{M_2}
+    \end{align*}
+\]</div>
+<div class="math notranslate nohighlight">
+\[ \text{vrednost } V ::= ... \mid \inl V \mid \inr V \]</div>
+<p>Sintaksa je podobna kot pri parih, le da sta tu dva konstruktorja in en sam razgrajevalnik, ki pa vsebuje obe možnosti za obliko vsote.
+Če bi imeli več konstruktorjev za isti tip, bi morali dodati več vej v razgrajevalnik.
+Pomembno je, da je del <span class="math notranslate nohighlight">\(\inl x_1\)</span> <strong>vzorec</strong> in ne izraz (običajno programski jeziki podpiranjo gnezdenje vzorcev, ki se mu bomo zaradi enostavnosti izognili), ki spremenljivki <span class="math notranslate nohighlight">\(x_1\)</span> <em>priredi</em> vrednost v levi komponenti vsote.
+Če to navidezno spominja na lambda abstrakcijo, je to namerno, saj lahko na vsako vejo razgrajevalnika gledamo kot na funkcijo, ki sprejme vrednost v vsoti in ji priredi telo te veje.</p>
+<p>Pomembno je še omeniti, da smo lahko pri izbiri sintakse za razgrajevalnik mnogo bolj inovativni kot pri parih, saj si lahko izberemo praktično karkoli.
+Navadno je merilo za izbiro sintakse nek smiselen kompromis med berljivostjo, kratkostjo in enostavnostjo pisanja razčlenjevalnika za jezik.</p>
+<div class="math notranslate nohighlight">
+\[
+    \begin{align*}
+    \text{tip } A,B &amp;::= ...
+         \mid A_1 + A_2
+    \end{align*}
+\]</div>
+<p>Tipi in vrednosti so direktni.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{\Gamma \vdash M : A_1}{\Gamma \vdash \inl M : A_1 + A_2}\\    \infer{\Gamma \vdash M : A_2}{\Gamma \vdash \inr M : A_1 + A_2}\\    \infer{\Gamma \vdash M : A_1 + A_2 \qquad \Gamma, x_1 : A_1 \vdash M_1 : B \qquad \Gamma, x_2 : A_2 \vdash M_2 : B}{\Gamma \vdash \matchsum{M}{x_1}{M_1}{x_2}{M_2} : B}
+\end{aligned}\end{align} \]</div>
+<p>Pri razgrajevalniku zahtevamo, da imata obe veji enak tip, saj je vrednost vsote lahko vložena s poljubnim konstruktorjem.
+Pogoj za posamezno vejo razčlenjevalnika pa je enak kot pri lambda abstrakciji, le da je tu tip spremenljivke že določen s krovnim tipom vsote.</p>
+<p>Pravila za izvajanje so enostavna, razgrajevalnik nekoliko spominja na pogojni stavek, ki potem izvajanje nadaljuje z lambda abstrakcijo v telesu veje.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{M \leadsto M'}{\inl M \leadsto \inl M'}\\    \infer{M \leadsto M'}{\inr M \leadsto \inr M'}\\    \infer{M \leadsto M'}{\matchsum{M}{x_1}{M_1}{x_2}{M_2} \leadsto \matchsum{M'}{x_1}{M_1}{x_2}{M_2}}\\    \infer{}{\matchsum{\inl V}{x_1}{M_1}{x_2}{M_2} \leadsto M_1[V/x_1]}\\    \infer{}{\matchsum{\inr V}{x_1}{M_1}{x_2}{M_2} \leadsto M_2[V/x_2]}
+\end{aligned}\end{align} \]</div>
+<!-- TODO: dodajanje lastnih konstruktorjev, CH isomorphism? -->
+<!-- https://stackoverflow.com/a/6237886/1062835 -->
+</section>
+<section id="seznami">
+<h3>Seznami<a class="headerlink" href="#seznami" title="Permalink to this heading">#</a></h3>
+<p>Seznami so samo poseben primer vsot, kjer prvi konstruktor ne sprejme dodantih argumentov, drugi pa sprejme dva (ali pa en sam, ki je par).</p>
+<div class="math notranslate nohighlight">
+\[
+    \begin{align*}
+    \text{izraz } M &amp;::= ...
+        \mid [] \mid M_1 :: M_2 \mid \matchlist{M}{M_1}{x_1}{x_2}{M_2}
+    \end{align*}
+\]</div>
+<div class="math notranslate nohighlight">
+\[ \text{vrednost } V ::= ... \mid [] \mid V_1 :: V_2 \]</div>
+<div class="math notranslate nohighlight">
+\[
+    \begin{align*}
+    \text{tip } A,B &amp;::= ...
+         \mid \kwdpre{list} A
+    \end{align*}
+\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{}{\Gamma \vdash [] : \kwdpre{list} A}\\    \infer{\Gamma \vdash M_1 : A \qquad \Gamma \vdash M_2 : \kwdpre{list} A}{\Gamma \vdash M_1 :: M_2 : \kwdpre{list} A}\\    \infer{\Gamma \vdash M : \kwdpre{list} A \qquad \Gamma \vdash M_1 : B \qquad \Gamma, x_1 : A, x_2 : \kwdpre{list} A \vdash M_2 : B}{\Gamma \vdash \matchlist{M}{M_1}{x_1}{x_2}{M_2} : B}
+\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{M_1 \leadsto M_1'}{M_1 :: M_2 \leadsto M_1' :: M_2}\\    \infer{M_2 \leadsto M_2'}{V_1 :: M_2 \leadsto V_1 :: M_2'}\\    \infer{M \leadsto M'}{\matchlist{M}{M_1}{x_1}{x_2}{M_2} \leadsto \matchlist{M'}{M_1}{x_1}{x_2}{M_2}}\\    \infer{}{\matchlist{[]}{M_1}{x_1}{x_2}{M_2} \leadsto M_1}\\    \infer{}{\matchlist{V_1 :: V_2}{M_1}{x_1}{x_2}{M_2} \leadsto M_2[V_1/x_1, V_2/x_2]}
+\end{aligned}\end{align} \]</div>
+<!-- records -->
+</section>
+<section id="leno-izvajanje">
+<h3>Leno izvajanje<a class="headerlink" href="#leno-izvajanje" title="Permalink to this heading">#</a></h3>
+<p>Pri lenem izvajanju (ang.~Call by name - CBN), izrazov ne izvajamo, dokler jih ne potrebujemo.
+Pri aplikaciji funkcije torej ne izračunamo vrednosti argumenta, ampak ga kar substituiramo v telo funkcije, tudi izraz, na katerega apliciramo argument računamo le toliko časa, da pridemo do ustrezne oblike, kjer lahko opravimo substitucijo.</p>
+<p>Za naše dodane konstrutke to pomeni, da pri parih ne izračunamo vrednosti komponent, saj je dovolj, da pridemo do oblike (par dveh izrazov).
+Pri razgradnji para dobimo le komponento, ki jo potrebujem in še to izračunamo, ko jo res potrebujemo.</p>
+<p>Sintasa in tipi ostanejo povsod ostanejo enaki, pravila za izvajanje pa se spremenijo tako, da ostanejo zgolj sledeča:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \infer{M \leadsto M'}{\fst M \leadsto \fst M'}\\    \infer{M \leadsto M'}{\snd M \leadsto \snd M'}\\    \infer{}{\fst (M_1, M_2) \leadsto M_1}\\    \infer{}{\snd (M_1, M_2) \leadsto M_2}\\    \infer{M \leadsto M'}{\matchsum{M}{x_1}{M_1}{x_2}{M_2} \leadsto \matchsum{M'}{x_1}{M_1}{x_2}{M_2}}\\    \infer{}{\matchsum{\inl M}{x_1}{M_1}{x_2}{M_2} \leadsto M_1[M/x_1]}\\    \infer{}{\matchsum{\inr M}{x_1}{M_1}{x_2}{M_2} \leadsto M_2[M/x_2]}\\    \infer{M \leadsto M'}{\matchlist{M}{M_1}{x_1}{x_2}{M_2} \leadsto \matchlist{M'}{M_1}{x_1}{x_2}{M_2}}\\    \infer{}{\matchlist{[]}{M_1}{x_1}{x_2}{M_2} \leadsto M_1}\\    \infer{}{\matchlist{M'_1 :: M'_2}{M_1}{x_1}{x_2}{M_2} \leadsto M_2[M'_1/x_1, M'_2/x_2]}
+\end{aligned}\end{align} \]</div>
+<p>Ključna razlika je, da sedaj pri razgradnji deli niso nujno več vrednosti, ampak poljubni izrazi.</p>
+</section>
+</section>
+<section id="naloga-6">
+<h2>Naloga 6<a class="headerlink" href="#naloga-6" title="Permalink to this heading">#</a></h2>
+<p>V jeziku iz naloge 3 poiščite primeren tip za spodnji izraz in ustreznost preverite z izpeljavo, v primeru ko sta s <code class="docutils literal notranslate"><span class="pre">fst</span></code> in <code class="docutils literal notranslate"><span class="pre">snd</span></code> označeni projekciji na prvo in drugo komponento para.</p>
+<p><code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">p</span> <span class="pre">-&gt;</span> <span class="pre">(match</span> <span class="pre">fst</span> <span class="pre">p</span> <span class="pre">with</span> <span class="pre">[]</span> <span class="pre">-&gt;</span> <span class="pre">true</span> <span class="pre">|</span> <span class="pre">x</span> <span class="pre">::</span> <span class="pre">xs</span> <span class="pre">-&gt;</span> <span class="pre">snd</span> <span class="pre">p))</span> <span class="pre">(1::2::[],</span> <span class="pre">false)</span></code></p>
+</section>
+<section id="naloga-7">
+<h2>Naloga 7<a class="headerlink" href="#naloga-7" title="Permalink to this heading">#</a></h2>
+<p>Pokažite, kako lahko v jezik dodamo medsebojno rekurzivne funkcije.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            name: "ocaml-jupyter",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06-tipi.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tipi</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07-izpeljava-tipov.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Izpeljava tipov</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-1">Naloga 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-2">Naloga 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-3">Naloga 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-4">Naloga 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-5">Naloga 5</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pari">Pari</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vsote">Vsote</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seznami">Seznami</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leno-izvajanje">Leno izvajanje</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-6">Naloga 6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naloga-7">Naloga 7</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matija Pretnar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.12
+    jupytext_version: 1.8.0
+kernelspec:
+  display_name: OCaml 4.11
+  language: OCaml
+  name: ocaml-jupyter
+---
+
+# Vaje
+
+```{code-cell}
+:tags: [remove-cell, remove-stdout]
+
+(* Ko se v Jupytru prvič požene OCaml, program Findlib izpiše neko sporočilo.
+   Da se to sporočilo ne bi videlo v zapiskih, je tu ta celica, ki sproži izpis,
+   vendar ima nastavljeno, da je v zapiskih v celoti skrita. *)
+```
+
+## Naloga 1
+
+Preverite, ali so sledeče konstrukcije domene ($\leq$ je standardna ureditev na $\mathbb{R}$).
+
+1. $((0,1), \leq)$ NE -> Ni bot
+2. $([0,1], \leq)$ -> Da
+3. $([0,1) \cup (2,3], \leq)$ -> Ne, 1/n nima supremuma
+4. $([0,1) \cup [2,3], \leq)$ -> Da
+
+## Naloga 2
+
+Naj bo $\leq$ standardna ureditev na $\mathbb{N}$. Definirajte relacijo $\lessdot$ na množici $\mathbb{N} \to \mathbb{N}$ kot
+
+$$f \lessdot g  \iff \forall n \in \mathbb{N}. f(n) \leq g(n).$$
+
+Je $(\mathbb{N} \to \mathbb{N}, \lessdot)$ delno urejena množica? Je domena?
+
+Ja, po točkah (to so)
+
+Ne, f_n(_) = n, ker nima supremuma 
+
+## Naloga 3
+Dokažite da za vsako monotono funkcijo velja
+lub f (x_i) <= f (lub x_i)  
+
+x_i <= lub x_i // ker zgornja meja
+f(x_i) <= f(lub x_i) // ker monotona
+ker je lub natancna zgornja meja in je f (lub x_i) zgornja meja, je lub f (x_i) <= f (lub x_i)
+
+## Naloga 4
+
+Naj bo $P$ končna delno urejena množica z najmanjšim elementom. Naj bo $D$ poljubna domena.
+
+1. Pokažite, da je $P$ domena.
+
+- Bot je.
+- Naj bo x neka veriga, ker je P končna in delno urejena, potem od nekje naprej x konstantno, torej ima supremum točno to
+
+2. Dokažite, da je funkcija iz $P \to D$ zvezna natanko tedaj ko je monotona
+
+rabimo pokazat samo da (lub f(x_i)) >= f (lub x_i)
+
+
+3. Ali to velja tudi za $\mathbb{N}$? Kaj pa za $\mathbb{N}_\bot$ s plosko urejenostjo?
+
+Že lub nimamo pri naravnih.
+Če pa mamo, potem je pa isto kot gor - končna množica omejena za max te verige
+
+To pa ja, veriga je potem bot al pa bot, ....., N -> To pa je končno
+
+## Naloga 4
+
+Premislite, kako bi za podani domeni $(D_1, \leq_1)$ in $(D_1, \leq_2)$ skonstruirali domeno za produkt $D_1 \times D_2$ in vsoto $D_1 + D_2$. Premislite katere od možnosti bi bile primerne za modeliranje parov in vsot v neučakani oz. leni semantiki.
+
+## Naloga 5
+
+Operator $+_{\bot}$ definiramo kot:
+
+$$ x +_{\bot} y = \begin{cases}
+  \bot & x = \bot \vee  y=\bot \\
+  x + y & \text{sicer}
+\end{cases}$$
+
+
+Pokažite da je zvezen
+
+## Naloga 6
+
+Pokažite, da je if zvezen
+
+## Naloga 7
+
+Pokažite, da je f : D1 x D2 -> D zvezna ko je pi1 << f_1 in pi2 << f_2 zvezna
+
+f1 = pi1 << f
+f2 = pi2 << f
+
+
+x<=y => f(x) <= f(y)
+f(x) = (f_1(x), f_2(x)) <= (f_1(y), f_2(y)) = f(y)
+
+isto za ohranjanje
+
+
+
+Pokažite, da je g : D -> D1 x D2 zvezna ko je f^1 in f^2 zvezna
+
+g1_y(x) = g(x,y)
+g2_x(y) = g(x,y)
+
+x, y <= x', y' => g(x,y) <= g(x',y')
+
+g(x,y) = (g1_y(x), g2_x(y)) <= (g1_y(x'), g2_x(y')) = g(x',y')
+
+
+## Naloga 8
+
+Izračunajte najmanjši fiksni točki funkcij $F, G: [\mathbb{N}_\bot \to \mathbb{N}_\bot] \to [\mathbb{N}_\bot \to \mathbb{N}_\bot]$
+
+$$ F(f)(n) = \begin{cases}
+  \bot & n = \bot \\
+  0 & n = 0 \\
+  (2n-1) +_\bot f(n) & n > 0
+\end{cases} $$
+
+$$ G(f)(n) = \begin{cases}
+  \bot & n = \bot \\
+  0 & n = 0 \\
+  (2n-1) +_\bot f(n-1) & n > 0
+\end{cases} $$
+
+## Naloga 6
+
+Naj bo $\mathbb{T} = \{tt, ff\}$ in $F : [\mathbb{N}_\bot \to \mathbb{T}_\bot] \to [\mathbb{N}_\bot \to \mathbb{T}_\bot]$,
+
+$$ F(f)(n) = \begin{cases}
+  \bot & n = \bot \\
+  f(n+2) & n = 0 \\
+  tt & n = 1 \\
+  f(n-2) & n \geq 0
+\end{cases} $$
+
+Izračunajte najmanjšo fiksno točko $F$.
+
+## Naloga 7
+
+Naj bo $D$ domena. Predpostavite, da za zaporedje $(x_{i,j})_{i,j\geq0}$ velja $x_{i,j} \leq x_{i', j'}$ kadar $i \leq i'$ in $j \leq j'$.
+
+Pokažite, da velja
+$$ \bigvee_i (\bigvee_j x_{i,j}) = \bigvee_i x_{i,i} $$
