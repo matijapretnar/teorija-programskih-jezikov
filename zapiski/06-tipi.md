@@ -253,11 +253,11 @@ Z indukcijo na izpeljavo $\Gamma, x : A, \Gamma' \vdash M : B$.
 
 * $\Gamma, x : A, \Gamma' \vdash \false : \boolty$, velja tudi $\Gamma, \Gamma' \vdash \false : \boolty$
 
-* $\Gamma, x : A, \Gamma' \vdash \ifthenelse{M}{M_1}{M_2} : A$, mora veljati
-    $\Gamma, x : A, \Gamma' \vdash M : \boolty$, $\Gamma, x : A, \Gamma' \vdash M_1 : A$ in $\Gamma, x : A, \Gamma' \vdash M_2 : A$.
+* $\Gamma, x : A, \Gamma' \vdash \ifthenelse{M}{M_1}{M_2} : A'$, mora veljati
+    $\Gamma, x : A, \Gamma' \vdash M : \boolty$, $\Gamma, x : A, \Gamma' \vdash M_1 : A'$ in $\Gamma, x : A, \Gamma' \vdash M_2 : A'$.
     Po indukcijski predpostavki zato velja
-    $\Gamma, \Gamma' \vdash M[N / x] : \boolty$, $\Gamma, \Gamma' \vdash M_1[N / x] : A$ in $\Gamma, \Gamma' \vdash M_2[N / x] : A$,
-    iz česar sledi $\Gamma, \Gamma' \vdash (\ifthenelse{M}{M_1}{M_2})[N / x] : A$, saj je
+    $\Gamma, \Gamma' \vdash M[N / x] : \boolty$, $\Gamma, \Gamma' \vdash M_1[N / x] : A'$ in $\Gamma, \Gamma' \vdash M_2[N / x] : A'$,
+    iz česar sledi $\Gamma, \Gamma' \vdash (\ifthenelse{M}{M_1}{M_2})[N / x] : A'$, saj je
     $(\ifthenelse{M}{M_1}{M_2})[N / x] = \ifthenelse{M[N / x]}{M_1[N / x]}{M_2}[N / x]$.
 
 * $\Gamma, x : A, \Gamma' \vdash \intsym{n} : \intty$, velja tudi $\Gamma, \Gamma' \vdash \intsym{n} : \intty$
