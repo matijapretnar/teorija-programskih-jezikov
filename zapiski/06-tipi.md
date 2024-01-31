@@ -236,65 +236,65 @@ Ker v operacijski semantiki nastopa substitucija, moramo najprej dokazati, da im
 
 ### Lema (o substituciji)
 
-Če velja $\Gamma, x : A, \Gamma' \vdash M : B$ in $\Gamma, \Gamma' \vdash N : A$, tedaj velja $\Gamma, \Gamma' \vdash M[N / x] : B$.
+Če velja $\Gamma, x : A \vdash M : B$ in $\Gamma \vdash N : A$, tedaj velja $\Gamma \vdash M[N / x] : B$.
 
 #### Dokaz
 
-Z indukcijo na izpeljavo $\Gamma, x : A, \Gamma' \vdash M : B$.
+Z indukcijo na izpeljavo $\Gamma, x : A \vdash M : B$.
 Če je zaključek zadnjega uporabljenega pravila:
 
-* $\Gamma, x : A, \Gamma' \vdash x : A$, ker je $M = x$, velja $M[N / x] = N$,
-    torej velja $\Gamma, \Gamma' \vdash M[N / x] : B$ po drugi predpostavki.
+* $\Gamma, x : A, \vdash x : A$, ker je $M = x$, velja $M[N / x] = N$,
+    torej velja $\Gamma, \vdash M[N / x] : B$ po drugi predpostavki.
 
-* $\Gamma, x : A, \Gamma' \vdash y : B$ za $y ≠ x$, iz prve predpostavke sledi $(y : B) ∈ \Gamma, \Gamma'$.
-    Iz tega sledi $\Gamma, \Gamma' \vdash M[N / x] : B$, saj iz $M = y$ sledi $M[N / x] = y$.
+* $\Gamma, x : A, \vdash y : B$ za $y ≠ x$, iz prve predpostavke sledi $(y : B) ∈ \Gamma, \Gamma'$.
+    Iz tega sledi $\Gamma, \vdash M[N / x] : B$, saj iz $M = y$ sledi $M[N / x] = y$.
 
-* $\Gamma, x : A, \Gamma' \vdash \true : \boolty$, velja tudi $\Gamma, \Gamma' \vdash \true : \boolty$
+* $\Gamma, x : A, \vdash \true : \boolty$, velja tudi $\Gamma, \vdash \true : \boolty$
 
-* $\Gamma, x : A, \Gamma' \vdash \false : \boolty$, velja tudi $\Gamma, \Gamma' \vdash \false : \boolty$
+* $\Gamma, x : A, \vdash \false : \boolty$, velja tudi $\Gamma, \vdash \false : \boolty$
 
-* $\Gamma, x : A, \Gamma' \vdash \ifthenelse{M}{M_1}{M_2} : A$, mora veljati
-    $\Gamma, x : A, \Gamma' \vdash M : \boolty$, $\Gamma, x : A, \Gamma' \vdash M_1 : A$ in $\Gamma, x : A, \Gamma' \vdash M_2 : A$.
+* $\Gamma, x : A, \vdash \ifthenelse{M}{M_1}{M_2} : A$, mora veljati
+    $\Gamma, x : A, \vdash M : \boolty$, $\Gamma, x : A, \vdash M_1 : A$ in $\Gamma, x : A, \vdash M_2 : A$.
     Po indukcijski predpostavki zato velja
-    $\Gamma, \Gamma' \vdash M[N / x] : \boolty$, $\Gamma, \Gamma' \vdash M_1[N / x] : A$ in $\Gamma, \Gamma' \vdash M_2[N / x] : A$,
-    iz česar sledi $\Gamma, \Gamma' \vdash (\ifthenelse{M}{M_1}{M_2})[N / x] : A$, saj je
+    $\Gamma, \vdash M[N / x] : \boolty$, $\Gamma, \vdash M_1[N / x] : A$ in $\Gamma, \vdash M_2[N / x] : A$,
+    iz česar sledi $\Gamma, \vdash (\ifthenelse{M}{M_1}{M_2})[N / x] : A$, saj je
     $(\ifthenelse{M}{M_1}{M_2})[N / x] = \ifthenelse{M[N / x]}{M_1[N / x]}{M_2}[N / x]$.
 
-* $\Gamma, x : A, \Gamma' \vdash \intsym{n} : \intty$, velja tudi $\Gamma, \Gamma' \vdash \intsym{n} : \intty$
+* $\Gamma, x : A, \vdash \intsym{n} : \intty$, velja tudi $\Gamma, \vdash \intsym{n} : \intty$
 
-* $\Gamma, x : A, \Gamma' \vdash M_1 + M_2 : \intty$, mora veljati
-    $\Gamma, x : A, \Gamma' \vdash M_1 : \intty$ in $\Gamma, x : A, \Gamma' \vdash M_2 : \intty$.
+* $\Gamma, x : A, \vdash M_1 + M_2 : \intty$, mora veljati
+    $\Gamma, x : A, \vdash M_1 : \intty$ in $\Gamma, x : A, \vdash M_2 : \intty$.
     Po indukcijski predpostavki zato velja
-    $\Gamma, \Gamma' \vdash M_1[N / x] : \intty$ in $\Gamma, \Gamma' \vdash M_2[N / x] : \intty$
-    iz česar sledi $\Gamma, \Gamma' \vdash (M_1 + M_2)[N / x] : \intty$, saj je
+    $\Gamma, \vdash M_1[N / x] : \intty$ in $\Gamma, \vdash M_2[N / x] : \intty$
+    iz česar sledi $\Gamma, \vdash (M_1 + M_2)[N / x] : \intty$, saj je
     $(M_1 + M_2)[N / x] = M_1[N / x] + M_2[N / x]$.
 
-* $\Gamma, x : A, \Gamma' \vdash M_1 * M_2 : \intty$, mora veljati
-    $\Gamma, x : A, \Gamma' \vdash M_1 : \intty$ in $\Gamma, x : A, \Gamma' \vdash M_2 : \intty$.
+* $\Gamma, x : A, \vdash M_1 * M_2 : \intty$, mora veljati
+    $\Gamma, x : A, \vdash M_1 : \intty$ in $\Gamma, x : A, \vdash M_2 : \intty$.
     Po indukcijski predpostavki zato velja
-    $\Gamma, \Gamma' \vdash M_1[N / x] : \intty$ in $\Gamma, \Gamma' \vdash M_2[N / x] : \intty$
-    iz česar sledi $\Gamma, \Gamma' \vdash (M_1 * M_2)[N / x] : \intty$, saj je
+    $\Gamma, \vdash M_1[N / x] : \intty$ in $\Gamma, \vdash M_2[N / x] : \intty$
+    iz česar sledi $\Gamma, \vdash (M_1 * M_2)[N / x] : \intty$, saj je
     $(M_1 * M_2)[N / x] = M_1[N / x] * M_2[N / x]$.
 
-* $\Gamma, x : A, \Gamma' \vdash M_1 < M_2 : \boolty$, mora veljati
-    $\Gamma, x : A, \Gamma' \vdash M_1 : \intty$ in $\Gamma, x : A, \Gamma' \vdash M_2 : \intty$.
+* $\Gamma, x : A, \vdash M_1 < M_2 : \boolty$, mora veljati
+    $\Gamma, x : A, \vdash M_1 : \intty$ in $\Gamma, x : A, \vdash M_2 : \intty$.
     Po indukcijski predpostavki zato velja
-    $\Gamma, \Gamma' \vdash M_1[N / x] : \intty$ in $\Gamma, \Gamma' \vdash M_2[N / x] : \intty$
-    iz česar sledi $\Gamma, \Gamma' \vdash (M_1 < M_2)[N / x] : \boolty$, saj je
+    $\Gamma, \vdash M_1[N / x] : \intty$ in $\Gamma, \vdash M_2[N / x] : \intty$
+    iz česar sledi $\Gamma, \vdash (M_1 < M_2)[N / x] : \boolty$, saj je
     $(M_1 < M_2)[N / x] = M_1[N / x] < M_2[N / x]$.
 
-* $\Gamma, x : A, \Gamma' \vdash \lambda y. M' : A' \to B'$, mora veljati
+* $\Gamma, x : A, \vdash \lambda y. M' : A' \to B'$, mora veljati
     $\Gamma, x : A, \Gamma', y : A' \vdash M' : B'$.
     Po indukcijski predpostavki zato velja
     $\Gamma, \Gamma', y : A' \vdash M'[N / x] : B'$
-    iz česar sledi $\Gamma, \Gamma' \vdash (\lambda y. M')[N / x] : A' \to B'$, saj je
+    iz česar sledi $\Gamma, \vdash (\lambda y. M')[N / x] : A' \to B'$, saj je
     $(\lambda y. M')[N / x] = \lambda y. M'[N / x]$.
 
-* $\Gamma, x : A, \Gamma' \vdash M_1 \, M_2 : B$, mora veljati
-    $\Gamma, x : A, \Gamma' \vdash M_1 : A' \to B$ in $\Gamma, x : A, \Gamma' \vdash M_2 : A'$.
+* $\Gamma, x : A, \vdash M_1 \, M_2 : B$, mora veljati
+    $\Gamma, x : A, \vdash M_1 : A' \to B$ in $\Gamma, x : A, \vdash M_2 : A'$.
     Po indukcijski predpostavki zato velja
-    $\Gamma, \Gamma' \vdash M_1[N / x] : A' \to B$ in $\Gamma, \Gamma' \vdash M_2[N / x] : A'$
-    iz česar sledi $\Gamma, \Gamma' \vdash (M_1 \, M_2)[N / x] : B$, saj je
+    $\Gamma, \vdash M_1[N / x] : A' \to B$ in $\Gamma, \vdash M_2[N / x] : A'$
+    iz česar sledi $\Gamma, \vdash (M_1 \, M_2)[N / x] : B$, saj je
     $(M_1 \, M_2)[N / x] = M_1[N / x] \, M_2[N / x]$.
 
 ### Trditev (napredek)
