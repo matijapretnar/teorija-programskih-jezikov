@@ -339,7 +339,7 @@ Dokaza ne bomo navajali, ker je bolj tehničen, najdete pa ga lahko v razdelku 2
 
 Tudi v drugi fazi moramo pokazati, da je najdena rešitev res najbolj splošna. Tudi tu najprej pokažemo, da rešitev vedno obstaja.
 
-**Trditev.** Če velja $\sigma \models \eqs$, tedaj obstaja $\sigma'$, da velja $\eqs \models \sigma'$.
+**Trditev.** Če velja $\sigma \models \eqs$, tedaj obstaja $\sigma'$, da velja $\eqs \searrow \sigma'$.
 
 **Dokaz.** Dokaz poteka z malo bolj zapleteno indukcijo, saj ni očitno, katera stvar se v predpostavkah manjša. Na primer, včasih se enačb znebimo, včasih zamenjamo eno enačbo z več novimi, vendar z manjšimi tipi, včasih pa tipe povečamo, vendar se znebimo parametrov. Vse to zajamemo z leksikografsko urejenostjo med sistemi enačb.
 
