@@ -294,7 +294,7 @@ Mi pa bomo zato, da bomo ostali znotraj enega orodja in zraven ponovili še malo
 
 Recimo, da želimo razčlenjevalnik za cela števila. Začnimo z željo po funkciji `string -> int`, ki vzame vhodni niz ter vrne prebrano število, na primer iz niza `"42"` dobimo število `42`.
 
-Ker vsak niz ne bo predstavljal števila, moramo najprej popraviti ti rezultata, da dobimo `string -> int option`. Tako bomo iz niza `"42"` dobili `Some 42`, iz niza `"abc"` pa `None`.
+Ker vsak niz ne bo predstavljal števila, moramo najprej popraviti rezultata, da dobimo `string -> int option`. Tako bomo iz niza `"42"` dobili `Some 42`, iz niza `"abc"` pa `None`.
 
 Razčlenjevalnike bomo združevali in vsak ne bo prebral celotnega niza, temveč samo njegov začetek, preostanek pa bo predal nadaljnjim razčlenjevalnikom. Zato ne vrnemo samo rezultata, temveč tudi preostali niz, zato je še boljši tip `string -> (int * string) option`. Tako bi razčlenjevalnik pri vhodu `"42abc"` vrnil `Some (42, "abc")`, pri vhodu `"42"` rezultat `Some (42, "")`, pri vhodu `"abc42"` pa `None`, saj začetek ne predstavlja števila.
 

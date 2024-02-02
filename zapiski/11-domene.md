@@ -34,7 +34,7 @@ Delno urejena množica $(D, \le)$ je _domena_, če:
 Primeri domen so:
 
 - Interval $[0, 1]$ ali pa $[0, 1) \cup \{2\}$ z običajno urejenostjo $\le$. Interval $(0, 1]$ ni domena, ker nima dna, interval $[0, 1)$ pa ne, ker veriga $(1 - \frac{1}{i + 1})_i$ nima supremuma.
-- Vsako množico $A$ lahko razširimmo z dodatnim elementom $\bot$. Na $A_\bot = A + \{ \bot \}$, lahko definiramo urejenost $\le$ kot
+- Vsako množico $A$ lahko razširimo z dodatnim elementom $\bot$. Na $A_\bot = A + \{ \bot \}$, lahko definiramo urejenost $\le$ kot
 $x \le y \iff x = \iota_2(\bot) \lor x = y$. Pri zapisu elementov nismo pedantni, ampak namesto $\iota_1(a)$ pišemo kar $a$, namesto $\iota_2(\bot)$ pa kar $\bot$. Primer dvigov sta domeni $\mathbb{B}_\bot$ ali $\mathbb{Z}_\bot$, ki ju bomo še uporabljali in sta videti kot
 
 ![slika dvigov](slike/dvig.png)
@@ -121,7 +121,7 @@ $$
     \begin{align*}
     \itp{\boolty} &= \mathbb{B}_\bot \\
     \itp{\intty} &= \mathbb{Z}_\bot \\
-    \itp{A \to B} &= [\itp{A} \to \itp{B}]
+    \itp{A \to B} &= [\itp{A} \to_\bot \itp{B}]_\bot
     \end{align*}
 $$
 

@@ -2,7 +2,7 @@
 
 Denotacijska semantika pomen programom daje prek obstoječih matematičnih pojmov, s čimer dobimo nov pogled in tudi dostop do široke palete orodij. Na primer, v matematiki smo navajeni, da eno vrednost lahko kjerkoli zamenjamo z drugo, ki ji je enaka. Na primer, $6 \cdot 7$ lahko vedno zamenjamo z $42$ in dobimo enak rezultat.
 
-V programskih jezikih zgodba ni tako enostavna, saj izraza $M = \intsym{6} + \intsym{7}$ in $\intsym{42}$ nista enaka, pa bi vendar radi prvega zamenjali z drugim, da na primer s tem dobimo krajši in hitrejši program. Kdaj to lahko storimo?
+V programskih jezikih zgodba ni tako enostavna, saj izraza $M = \intsym{6} * \intsym{7}$ in $\intsym{42}$ nista enaka, pa bi vendar radi prvega zamenjali z drugim, da na primer s tem dobimo krajši in hitrejši program. Kdaj to lahko storimo?
 
 Res je, da velja $M \leadsto \intsym{42}$, vendar pa že izraza $\lambda x. M * x$ in $\lambda x. \intsym{42} * x$ nista enaka, hkrati pa sta vrednosti, zato niti ne obstaja zaporedje korakov, ki bi ju pripeljalo skupaj. A vseeno sta obe funkciji na nek način ekvivalentni, saj bosta uporabljeni na istih številih na koncu dali isti rezultat. Seveda se izraz $M$ lahko pojavi tudi v funkcijah višjega reda in z zamenjavo z $\intsym{42}$ bomo dobili drugačno funkcijo, ki pa bo na _ekvivalentnih_ argumentih dala _ekvivalentne_ rezultate. Ampak tudi s funkcijami višjega reda nismo izčrpali vseh možnih izrazov, v katerih se lahko pojavi $M$.
 
