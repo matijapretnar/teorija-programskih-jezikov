@@ -134,7 +134,7 @@ $$
 saj vemo, da je tudi produkt domen domena. Izraze $\Gamma \vdash M : A$ bomo interpretirali z zveznimi preslikavami
 
 $$
-  \itp{\Gamma \vdash M : A} : [\itp{\Gamma} \to \itp{A}]
+  \itp{\Gamma \vdash M : A} : \itp{\Gamma} \to \itp{A}
 $$
 
 ki so podane s sledečimi predpisi:
