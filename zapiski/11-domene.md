@@ -131,7 +131,7 @@ $$
   \itp{x_1 : A_1, \dots, x_n : A_n} = \itp{A_1} \times \dots \times \itp{A_n}
 $$
 
-saj vemo, da je tudi produkt domen domena. Izraza $\Gamma \vdash M : A$ bomo interpretirali z zveznimi preslikavami
+saj vemo, da je tudi produkt domen domena. Izraze $\Gamma \vdash M : A$ bomo interpretirali z zveznimi preslikavami
 
 $$
   \itp{\Gamma \vdash M : A} : \itp{\Gamma} \to \itp{A}
