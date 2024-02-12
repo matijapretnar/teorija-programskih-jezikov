@@ -1,0 +1,222 @@
+\documentclass[arhiv]{../izpit}
+\usepackage{amssymb}
+\usepackage{fouriernc}
+\usepackage{mathpartir}
+\usepackage{stmaryrd}
+
+\begin{document}
+
+\newcommand{\bnfis}{\mathrel{{:}{:}{=}}}
+\newcommand{\bnfor}{\;\mid\;}
+\newcommand{\fun}[2]{\lambda #1. #2}
+\newcommand{\conditional}[3]{\mathtt{if}\;#1\;\mathtt{then}\;#2\;\mathtt{else}\;#3}
+\newcommand{\whileloop}[2]{\mathtt{while}\;#1\;\mathtt{do}\;#2}
+\newcommand{\recfun}[3]{\mathtt{rec}\;#1\;#2. #3}
+\newcommand{\boolty}{\mathtt{bool}}
+\newcommand{\intty}{\mathtt{int}}
+\newcommand{\funty}[2]{#1 \to #2}
+\newcommand{\tru}{\mathtt{true}}
+\newcommand{\fls}{\mathtt{false}}
+\newcommand{\unt}{\hbox{\texttt{()}}}
+\newcommand{\tbool}{\mathtt{bool}}
+\newcommand{\tand}{\mathbin{\mathtt{and}}}
+\newcommand{\tandalso}{\mathbin{\mathtt{andalso}}}
+\newcommand{\imp}{\textsc{imp}}
+\newcommand{\skp}{\mathtt{skip}}
+\newcommand{\itp}[1]{\llbracket #1 \rrbracket}
+\makeatletter
+\newcommand{\nadaljevanje}{\dodatek{\newpage\noindent\emph{(\@sloeng{nadaljevanje rešitve \arabic{naloga}. naloge}{continuation of the answer to question \arabic{naloga}})}}}
+\makeatother
+\izpit
+[ucilnica=203,naloge=-1]{Teorija programskih jezikov: 1. izpit}{2.\ februar 2024}{
+}
+\dodatek{
+  \vspace{\stretch{1}}
+  \begin{itemize}
+    \item \textbf{Ne odpirajte} te pole, dokler ne dobite dovoljenja.
+    \item Zgoraj \textbf{vpišite svoje podatke} in označite \textbf{sedež}.
+    \item Na vidno mesto položite \textbf{dokument s sliko}.
+    \item Preverite, da imate \textbf{telefon izklopljen} in spravljen.
+    \item Čas pisanja je \textbf{180 minut}.
+    \item Doseči je možno \textbf{80 točk}.
+    \item Veliko uspeha!
+  \end{itemize}
+  \vspace{\stretch{3}}
+  \newpage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+V $\lambda$-računu definirajmo izraze, s katerimi v Churchevem kodiranju predstavimo pare:
+\begin{align*}
+  \mathit{pair} & = \fun{a} \fun{b} \fun{f} f \, a \, b \\
+  \mathit{fst}  & = \fun{p} p (\fun{x} \fun{y} x)       \\
+  \mathit{snd}  & = \fun{p} p (\fun{x} \fun{y} y)
+\end{align*}
+
+\podnaloga[\tocke{5}] Zapišite drevo izpeljave $\mathit{fst} \, (\mathit{pair} \ 42 \ 24) \Downarrow 42$ v \textbf{neučakani} semantiki velikih korakov.
+\podnaloga[\tocke{5}] Zapišite vse korake v evalvaciji izraza $\mathit{fst} \, (\mathit{pair} \ 42 \ 24)$ v \textbf{leni} semantiki malih korakov. Izpeljav posameznih korakov ni treba pisati.
+\podnaloga[\tocke{10}] S pomočjo Hindley-Milnerjevega algoritma izračunajte najbolj splošen tip izraza $\mathit{fst}$.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\skipcmd}{\mathtt{skip}}
+
+Spremenimo jezik \textsc{Imp} tako, da vse tri vrste izrazov združimo v eno, ki jo bomo naknadno ločili s pomočjo tipov.
+\begin{align*}
+  \text{tip $\sigma$} \bnfis {}
+   & \mathtt{bool} \bnfor
+  \mathtt{int} \bnfor
+  \mathtt{unit}                       \\
+  \text{izraz $t, u$} \bnfis {}
+   & \# \ell \bnfor
+  \tru \bnfor
+  \fls \bnfor
+  \underline{n} \bnfor
+  t_1 + t_2 \bnfor
+  t_1 = t_2 \bnfor                    \\
+   & \conditional{t}{u_1}{u_2} \bnfor
+  \whileloop{t}{u} \bnfor
+  t ; u \bnfor
+  \ell := t \bnfor
+  \skipcmd
+\end{align*}
+Zapišite \emph{smiselna} pravila za relacijo $L \vdash t : \sigma$, ki ob vnaprej podanem seznamu definiranih lokacij in njihovih tipov $L = \ell_1 : \sigma_1, \dots, \ell_n : \sigma_n$ pove, da ima rezultat izraza $t$ tip $\sigma$. Upoštevajte, da tipi omogočajo dodatno fleksibilnost:
+\begin{itemize}
+  \item vsaka lokacija ima lahko poljuben (vnaprej določen) tip,
+  \item primerjamo lahko poljubni dve vrednosti istega tipa,
+  \item pogojni izraz lahko izbira med poljubnima dvema izrazoma istega tipa,
+  \item v izrazu $t; u$ ima lahko $u$ poljuben tip,
+  \item v prirejanju $\ell := t$ zahtevamo, da je lokacija $\ell$ predhodno definirana.
+\end{itemize}
+
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\unit}{\mathtt{unit}}
+\newcommand{\return}[1]{\mathtt{return}\;#1}
+\newcommand{\letin}[1]{\mathtt{let}\;#1\;\mathtt{in}\;}
+\newcommand{\throw}{\mathtt{throw}}
+
+Drobnozrnati neučakani $\lambda$-račun razširimo s sprožanjem ene same izjeme, kar določimo s sintakso
+\begin{align*}
+  \text{tip $A, B$} &\bnfis
+  \unit
+  \bnfor A \to B
+  \\
+  \text{vrednost $V$} &\bnfis
+  x
+  \bnfor \unt
+  \bnfor \fun{x} M
+  \\
+  \text{izračun $M, N$} &\bnfis
+  \return{V}
+  \bnfor \letin{x = M} N
+  \bnfor V_1 \, V_2
+  \bnfor \throw
+\end{align*}
+ter pravili za določanje tipov
+%
+\begin{mathpar}
+  \infer{
+    (x : A) \in \Gamma
+  }{
+    \Gamma \vdash_v x : A
+  } \and
+  \infer{
+  }{
+    \Gamma \vdash_v \unt : \unit
+  } \and
+  \infer{
+    \Gamma, x : A \vdash_c M : B
+  }{
+    \Gamma \vdash_v \lambda x. M : A \to B
+  } \and
+  \infer{
+    \Gamma \vdash_v V_1 : A \to B \and
+    \Gamma \vdash_v V_2 : A
+  }{
+    \Gamma \vdash_c V_1 \, V_2 : B
+  } \and
+  \infer{
+    \Gamma \vdash_v V : A
+  }{
+    \Gamma \vdash_c \return V : A
+  } \and
+  \infer{
+    \Gamma \vdash_c M : A \and
+    \Gamma, x : A \vdash_c N : B
+  }{
+    \Gamma \vdash_c \letin{x = M} N : B
+  } \and
+  \infer{
+  }{
+    \Gamma \vdash_c \throw : A
+  }
+\end{mathpar}
+%
+in operacijsko semantiko
+%
+\begin{mathpar}
+  \infer{M \leadsto M'}{
+    \letin{x = M} N \leadsto  \letin{x = M'} N
+  } \and
+  \infer{}{
+    \letin{x = \return V} N \leadsto N[V / x]
+  } \and
+  \infer{}{
+    \letin{x = \throw} N \leadsto \throw
+  } \and
+  \infer{}{
+    (\lambda x. M) \, V  \leadsto  M[V / x]
+  }
+\end{mathpar}
+
+\podnaloga[\tocke{5}] Podajte denotacijsko semantiko jezika v monadi za eno samo izjemo, določeni s predpisom $T X = X + \{ \star \}$ ter očitnima izbirama za enoto $\eta$ in veriženje $\gg\!\!\!=$.
+\podnaloga[\tocke{15}] Pokažite, da je operacijska semantika skladna z denotacijsko, torej da iz $\vdash M : A$ in $M \leadsto N$ sledi $\itp{\vdash M : A} = \itp{\vdash N : A}$. Pri tem lahko predpostavite ustrezno lemo o substituciji.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+Vzemimo $\lambda$-račun z enotskim tipom in funkcijami, podan s sintakso
+\[
+  \text{izraz $M, N$} \bnfis
+  x \bnfor
+  \unt \bnfor
+  \fun{x}{M} \bnfor
+  M \; N
+\]
+ter z običajnimi pravili za določanje tipov, neučakano operacijsko semantiko malih korakov in denotacijsko semantiko. Ne samo, da je denotacijska semantika skladna z operacijsko, temveč je tudi zadostna, torej iz $\itp{\vdash M : \unit} = \star$ sledi $M \leadsto^* \unt$.
+
+Pri dokazu si pomagamo z družino relacij $a \triangleleft_A M$, ki za vsak tip $A$ povezuje vrednosti $a \in \itp{A}$ z izrazi $\vdash M : A$. Relacijo definiramo kot
+\begin{align*}
+  a \triangleleft_{\unit} M &\iff (a = \star) \land (M \leadsto^* \unt) \\
+  f \triangleleft_{A \to B} M &\iff \forall a, N. a \triangleleft_A N \Rightarrow f(a) \triangleleft_B (M \, N)
+\end{align*}
+
+\podnaloga[\tocke{5}]
+Dokažite, da za vsak tip $A$ iz $a \triangleleft_A M'$ in $M \leadsto M'$ sledi $a \triangleleft_A M$.
+
+\podnaloga[\tocke{8}]
+Dokažite, da za vsak izraz $x_1 : A_1, \dots, x_n : A_n \vdash M : A$ in vse $(a_1 \triangleleft_{A_1} N_1), \dots, (a_n \triangleleft_{A_n} N_n)$ velja tudi $\itp{M}(a_1, \dots, a_n) \triangleleft_A M[N_1 / x_1, \dots, N_n / x_n]$.
+
+\podnaloga[\tocke{2}]
+Dokažite zadostnost denotacijske semantike.
+
+\podnaloga[\tocke{5}]
+Kaj bi bilo potrebno spremeniti v dokazu, da bi veljal tudi za dodatek rekurzivnih funkcij $\recfun{f}{x} M$?
+
+\nadaljevanje
+
+\end{document}
