@@ -406,7 +406,7 @@ Z indukcijo na predpostavko o koraku.
 
 ## Rekurzija
 
-Če želimo uporabljati rekurzijo, lahko uvedemo izraz $\kwdpre{rec} f \, x . M$, ki predstavlja rekurzivno funkcijo s telesom $M$, v katerem se lahko poleg argumenta $x$ pojavljajo tudi rekurzivni klici, dostopni prek spremenljivke $x$. Pravilo za določanje tipa je
+Če želimo uporabljati rekurzijo, lahko uvedemo izraz $\kwdpre{rec} f \, x . M$, ki predstavlja rekurzivno funkcijo s telesom $M$, v katerem se lahko poleg argumenta $x$ pojavljajo tudi rekurzivni klici, dostopni prek spremenljivke $f$. Pravilo za določanje tipa je
 
 $$
 \infer{
