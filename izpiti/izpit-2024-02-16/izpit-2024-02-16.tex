@@ -1,0 +1,238 @@
+\documentclass[arhiv]{../izpit}
+\usepackage{amssymb}
+\usepackage{fouriernc}
+\usepackage{mathpartir}
+\usepackage{stmaryrd}
+
+\begin{document}
+
+\newcommand{\bnfis}{\mathrel{{:}{:}{=}}}
+\newcommand{\bnfor}{\;\mid\;}
+\newcommand{\fun}[2]{\lambda #1. #2}
+\newcommand{\minfix}[2]{\mu #1. #2}
+\newcommand{\conditional}[3]{\mathtt{if}\;#1\;\mathtt{then}\;#2\;\mathtt{else}\;#3}
+\newcommand{\whileloop}[2]{\mathtt{while}\;#1\;\mathtt{do}\;#2}
+\newcommand{\recfun}[3]{\mathtt{rec}\;#1\;#2. #3}
+\newcommand{\boolty}{\mathtt{bool}}
+\newcommand{\intty}{\mathtt{int}}
+\newcommand{\funty}[2]{#1 \to #2}
+\newcommand{\tru}{\mathtt{true}}
+\newcommand{\fls}{\mathtt{false}}
+\newcommand{\unt}{\hbox{\texttt{()}}}
+\newcommand{\tbool}{\mathtt{bool}}
+\newcommand{\tand}{\mathbin{\mathtt{and}}}
+\newcommand{\tandalso}{\mathbin{\mathtt{andalso}}}
+\newcommand{\imp}{\textsc{imp}}
+\newcommand{\skp}{\mathtt{skip}}
+\newcommand{\itp}[1]{\llbracket #1 \rrbracket}
+\makeatletter
+\newcommand{\nadaljevanje}{\dodatek{\newpage\noindent\emph{(\@sloeng{nadaljevanje rešitve \arabic{naloga}. naloge}{continuation of the answer to question \arabic{naloga}})}}}
+\makeatother
+\izpit
+[ucilnica=203,naloge=-1]{Teorija programskih jezikov: 2. izpit}{16.\ februar 2024}{
+}
+\dodatek{
+  \vspace{\stretch{1}}
+  \begin{itemize}
+    \item \textbf{Ne odpirajte} te pole, dokler ne dobite dovoljenja.
+    \item Zgoraj \textbf{vpišite svoje podatke} in označite \textbf{sedež}.
+    \item Na vidno mesto položite \textbf{dokument s sliko}.
+    \item Preverite, da imate \textbf{telefon izklopljen} in spravljen.
+    \item Čas pisanja je \textbf{180 minut}.
+    \item Doseči je možno \textbf{80 točk}.
+    \item Veliko uspeha!
+  \end{itemize}
+  \vspace{\stretch{3}}
+  \newpage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+V $\lambda$-računu predstavimo kombinatorje S, K in I z izrazi:
+\begin{align*}
+  \mathsf{s} & = \fun{x} \fun{y} \fun{z} (x \, z) \, (y \, z) \\
+  \mathsf{k} & = \fun{x} \fun{y} x                            \\
+  \mathsf{i} & = \mathsf{s} \, \mathsf{k} \, \mathsf{k}
+\end{align*}
+
+\podnaloga[\tocke{5}] Naj bo $V$ poljubna vrednost. Zapišite vse korake v neučakani evalvaciji $\mathsf{i} \, V \leadsto^* V$. Izpeljav posameznih korakov ni treba pisati.
+\podnaloga[\tocke{10}] S pomočjo Hindley-Milnerjevega algoritma izračunajte najbolj splošen tip izraza $\mathsf{s}$.
+\podnaloga[\tocke{5}] Dokažite, da izraz $(\mathsf{s} \, \mathsf{i} \, \mathsf{i}) \, (\mathsf{s} \, \mathsf{i} \, \mathsf{i})$ nima veljavnega tipa.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\nxt}{\mathtt{next}}
+V $\lambda$-račun z neučakano semantiko dodamo izraz $\nxt$, ki ob vsakem klicu vrne naslednji člen iz vnaprej danega neskončnega zaporedja celih števil:
+\[
+  \text{izraz $e$} \bnfis
+  x \bnfor
+  \underline{n} \bnfor
+  \tru \bnfor
+  \fls \bnfor
+  e_1 + e_2 \bnfor
+  e_1 = e_2 \bnfor
+  \conditional{e}{e_1}{e_2} \bnfor
+  \fun{x}{e} \bnfor
+  e_1 \; e_2 \bnfor
+  \nxt
+\]
+Na primer, izraz $\nxt + \nxt = \nxt$ izračuna, če je vsota prvih dveh členov enaka tretjemu členu.
+
+Za razširjeni $\lambda$-račun zapišite pravila za semantiko malih korakov oblike $\langle e \mid s\rangle \leadsto \langle e' \mid s'\rangle$, da se bo zgornji primer ob zaporedju praštevil $2, 3, 5, 7, \dots$ evalviral kot
+\begin{align*}
+  \langle \nxt + \nxt = \nxt & \mid 2, 3, 5, \dots \rangle \leadsto   \\
+  \langle 2 + \nxt = \nxt    & \mid 3, 5, 7, \dots \rangle \leadsto   \\
+  \langle 2 + 3 = \nxt       & \mid 5, 7, 11, \dots \rangle \leadsto  \\
+  \langle 5 = \nxt           & \mid 5, 7, 11, \dots \rangle \leadsto  \\
+  \langle 5 = 5              & \mid 7, 11, 13, \dots \rangle \leadsto \\
+  \langle \tru               & \mid 7, 11, 13, \dots \rangle
+\end{align*}
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\fix}{\mathsf{fix}}
+
+
+\podnaloga[\tocke{5}]
+Naj bo $D$ domena in $f : D \to D$ zvezna preslikava.
+Pokažite, da za poljuben $y \in D$ velja
+\[
+  y \ge f(y) \implies y \ge \minfix{x}{f(x)}
+\]
+kjer je $\minfix{x}{f(x)}$ alternativen zapis za $\fix(f)$, torej najmanjšo fiksno točko preslikave $f$.
+
+\podnaloga[\tocke{15}]
+Dani naj bosta domeni $D$, $E$ ter zvezni preslikavi $f \colon D \times E \to D$ in $g \colon D \times E \to E$. Definirajmo
+%
+\begin{align*}
+  x_0 & = \minfix{x}{f(x, \minfix{y}{g(x, y)})} \\
+  y_0 & = \minfix{y}{g(x_0, y)}
+\end{align*}
+%
+Predpostavite lahko, da so vse fiksne točke dobro definirane, torej da našteti predpisi res podajajo zvezne preslikave.
+
+Pokažite, da sta $x_0$ in $y_0$ najmanjši hkratni fiksni točki $f$ in $g$, torej najmanjši vrednosti, da velja $x_0 = f(x_0, y_0)$ in $y_0 = g(x_0, y_0)$.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\skipcmd}{\mathtt{skip}}
+
+Programi v jeziku \textsc{MiniWasm} so sestavljeni iz zaporedij ukazov, ki jih podamo s sintakso:
+\begin{align*}
+  \text{ukaz $i$} \bnfis {}
+   & \mathtt{push}_v \bnfor
+   \mathtt{drop} \bnfor
+  \mathtt{add} \bnfor
+  \mathtt{eq} \bnfor
+  \mathtt{if} \, is_1 \, is_2 \\
+  \text{program $is$} \bnfis {}
+   & [] \bnfor
+  i :: is                     \\
+  \text{vrednost $v$} \bnfis {}
+   & \underline{n} \bnfor
+  \tru \bnfor
+  \fls
+\end{align*}
+%
+\textsc{MinWasm} je skladovni jezik, kar pomeni, da programi ob izvajanju spreminjajo sklad vrednosti $vs = v_1 :: v_2 :: \cdots :: v_k :: []$.
+Operacijsko semantiko definiramo z relacijo $is \mid vs \hookrightarrow is' \mid vs'$, podano kot
+%
+\begin{mathpar}
+  \infer{
+  }{
+    (\mathtt{push}_v :: is) \mid vs \hookrightarrow is \mid (v :: vs)
+  } \and
+  \infer{
+  }{
+    (\mathtt{drop} :: is) \mid (v :: vs) \hookrightarrow is \mid vs
+  } \and
+  \infer{
+  }{
+    (\mathtt{add} :: is) \mid (\underline{n_1} :: \underline{n_2} :: vs) \hookrightarrow is \mid (\underline{n_1 + n_2} :: vs)
+  } \and
+  \infer{
+    n_1 = n_2
+  }{
+    (\mathtt{eq} :: is) \mid (\underline{n_1} :: \underline{n_2} :: vs) \hookrightarrow is \mid (\tru :: vs)
+  } \and
+  \infer{
+    n_1 \ne n_2
+  }{
+    (\mathtt{eq} :: is) \mid (\underline{n_1} :: \underline{n_2} :: vs) \hookrightarrow is \mid (\fls :: vs)
+  } \and
+  \infer{
+  }{
+    ((\mathtt{if} \, is_1 \, is_2) :: is) \mid (\tru :: vs) \hookrightarrow (is_1 @ is) \mid vs
+  } \and
+  \infer{
+  }{
+    ((\mathtt{if} \, is_1 \, is_2) :: is) \mid (\fls :: vs) \hookrightarrow (is_2 @ is) \mid vs
+  }
+\end{mathpar}
+%
+kjer je $@$ stikanje seznamov.
+
+Če vrednostim in skladom na očiten način z relacijama $\vdash v : t$ in $\vdash vs : ts$ priredimo tipe
+%
+\begin{align*}
+  \text{tip vrednosti $t$} \bnfis {}
+   & \mathtt{int} \bnfor
+  \mathtt{bool}          \\
+  \text{tip sklada $ts$} \bnfis {}
+   & [] \bnfor
+  t :: ts
+\end{align*}
+%
+lahko definiramo tromestni relaciji $\vdash i : ts_1 \to ts_2$ in $\vdash is : ts_1 \to ts_2$, ki povesta, da ukaz~$i$ oziroma program~$is$ sklad tipa $ts_1$ spremenita v sklad tipa $ts_2$:
+%
+\begin{mathpar}
+  \infer{
+    \vdash v : t
+  }{
+    \vdash \mathtt{push}_v : ts \to (t :: ts)
+  } \and
+  \infer{
+  }{
+    \vdash \mathtt{drop} : (t :: ts) \to ts
+  } \and
+  \infer{
+  }{
+    \vdash \mathtt{add} : (\mathtt{int} :: \mathtt{int} :: ts) \to (\mathtt{int} :: ts)
+  } \and
+  \infer{
+  }{
+    \vdash \mathtt{eq} : (\mathtt{int} :: \mathtt{int} :: ts) \to (\mathtt{bool} :: ts)
+  } \and
+  \infer{
+    \vdash is_1 : ts_1 \to ts_2 \and
+    \vdash is_2 : ts_1 \to ts_2
+  }{
+    \vdash (\mathtt{if} \, is_1 \, is_2) : (\mathtt{bool} :: ts_1) \to ts_2
+  } \\
+  \infer{
+  }{
+    \vdash [] : ts \to ts
+  } \and
+  \infer{
+    \vdash i : ts_1 \to ts_2 \and
+    \vdash is : ts_2 \to ts_3
+  }{
+    \vdash (i :: is) : ts_1 \to ts_3
+  }
+\end{mathpar}
+%
+Zapišite trditvi o ohranitvi in napredku ter eno od njiju dokažite.
+
+\nadaljevanje
+
+\end{document}
