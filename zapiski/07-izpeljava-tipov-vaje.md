@@ -46,11 +46,11 @@ $$
         \Gamma \vdash \kwdpre{rec} f \, x . M : \alpha \to \beta \mid \alpha = A, \beta  = B, \eqs
     }
 
-    \infer{\Gamma \vdash M_1 : A_1 \mid \eqs_q \qquad \Gamma \vdash M_2 : A_2 \mid \eqs_2}{\Gamma \vdash (M_1, M_2) : \alpha_1 \times \alpha_2 \mid \alpha_1 = A_1, \alpha_2 = A_2, \eqs_1, \eqs_2}
+    \infer{\Gamma \vdash M_1 : A_1 \mid \eqs_1 \qquad \Gamma \vdash M_2 : A_2 \mid \eqs_2}{\Gamma \vdash (M_1, M_2) : \alpha_1 \times \alpha_2 \mid \alpha_1 = A_1, \alpha_2 = A_2, \eqs_1, \eqs_2}
 
     \infer{\Gamma \vdash M : A \mid \eqs}{\Gamma \vdash \fst M : \alpha_1 \mid \alpha_1 \times \alpha_2 = A, \eqs}
 
-    \infer{\Gamma \vdash M : A \mid \eqs}{\Gamma \vdash \fst M : \alpha_2 \mid \alpha_1 \times \alpha_2 = A, \eqs}
+    \infer{\Gamma \vdash M : A \mid \eqs}{\Gamma \vdash \snd M : \alpha_2 \mid \alpha_1 \times \alpha_2 = A, \eqs}
 
     \infer{\Gamma \vdash M : A_1 \mid \eqs}{\Gamma \vdash \inl M : \alpha \mid \alpha = A_1 + \alpha_2, \eqs}
 
