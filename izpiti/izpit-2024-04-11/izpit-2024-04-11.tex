@@ -1,0 +1,257 @@
+\documentclass[arhiv]{../izpit}
+\usepackage{amssymb}
+\usepackage{fouriernc}
+\usepackage{mathpartir}
+\usepackage{stmaryrd}
+
+\begin{document}
+
+\newcommand{\bnfis}{\mathrel{{:}{:}{=}}}
+\newcommand{\bnfor}{\;\mid\;}
+\newcommand{\fun}[2]{\lambda #1. #2}
+\newcommand{\minfix}[2]{\mu #1. #2}
+\newcommand{\conditional}[3]{\mathtt{if}\;#1\;\mathtt{then}\;#2\;\mathtt{else}\;#3}
+\newcommand{\whileloop}[2]{\mathtt{while}\;#1\;\mathtt{do}\;#2}
+\newcommand{\recfun}[3]{\mathtt{rec}\;#1\;#2. #3}
+\newcommand{\boolty}{\mathtt{bool}}
+\newcommand{\intty}{\mathtt{int}}
+\newcommand{\funty}[2]{#1 \to #2}
+\newcommand{\tru}{\mathtt{true}}
+\newcommand{\fls}{\mathtt{false}}
+\newcommand{\unt}{\hbox{\texttt{()}}}
+\newcommand{\tbool}{\mathtt{bool}}
+\newcommand{\tand}{\mathbin{\mathtt{and}}}
+\newcommand{\tandalso}{\mathbin{\mathtt{andalso}}}
+\newcommand{\imp}{\textsc{imp}}
+\newcommand{\skp}{\mathtt{skip}}
+\newcommand{\itp}[1]{\llbracket #1 \rrbracket}
+\makeatletter
+\newcommand{\nadaljevanje}{\dodatek{\newpage\noindent\emph{(\@sloeng{nadaljevanje rešitve \arabic{naloga}. naloge}{continuation of the answer to question \arabic{naloga}})}}}
+\makeatother
+\izpit
+[ucilnica=307,naloge=-1]{Teorija programskih jezikov: 3. izpit}{11.\ april 2024}{
+}
+\dodatek{
+  \vspace{\stretch{1}}
+  \begin{itemize}
+    \item \textbf{Ne odpirajte} te pole, dokler ne dobite dovoljenja.
+    \item Zgoraj \textbf{vpišite svoje podatke} in označite \textbf{sedež}.
+    \item Na vidno mesto položite \textbf{dokument s sliko}.
+    \item Preverite, da imate \textbf{telefon izklopljen} in spravljen.
+    \item Čas pisanja je \textbf{180 minut}.
+    \item Doseči je možno \textbf{80 točk}.
+    \item Veliko uspeha!
+  \end{itemize}
+  \vspace{\stretch{3}}
+  \newpage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+V $\lambda$-računu definirajmo izraz:
+\[
+  \mathsf{applyIf} = \fun{p} \fun{f} \fun{x} \conditional{p \, x}{f \, x}{x}
+\]
+
+\podnaloga[\tocke{10}] Zapišite vse korake evalvaciji izraza $\mathsf{applyIf} \; (\fun{x} 1 * 2 < x) \; (\fun{y} y + 3 * 4) \; (5 * 6)$ v \emph{leni} semantiki malih korakov. Izpeljav posameznih korakov ni treba pisati.. Izpeljav posameznih korakov ni treba pisati.
+\podnaloga[\tocke{10}] S pomočjo Hindley-Milnerjevega algoritma izračunajte najbolj splošen tip izraza $\mathsf{applyIf}$.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+Vzemimo varianto jezika \textsc{Imp}, ki namesto pomnilniških lokacij uporablja sklad celih števil:
+%
+\begin{align*}
+  \text{aritmetični izraz } e &::=
+    \underline{n} \mid
+    \mathtt{head} \mid
+    e_1 + e_2 \mid
+    \cdots \\
+  \text{logični izraz } b &::=
+    \tru \mid
+    \fls \mid
+    \mathtt{isEmpty} \mid
+    e_1 = e_2 \mid
+    \cdots \\
+  \text{ukaz } c &::=
+    \mathtt{push}\, e \mid
+    \mathtt{drop} \mid
+    \conditional{b}{c_1}{c_2} \mid
+    \whileloop{b}{c} \mid
+    c_1 ; c_2 \mid
+    \skp
+\end{align*}
+%
+kjer:
+\begin{itemize}
+  \item $\mathtt{isEmpty}$ vrne $\tru$, če je sklad prazen, in $\fls$ sicer,
+  \item $\mathtt{head}$ vrne glavo sklada, \emph{če ta obstaja},
+  \item $\mathtt{push} \, e$ na vrh sklada doda vrednost izraza $e$,
+  \item $\mathtt{drop}$ odstrani glavo sklada, \emph{če ta obstaja}.
+\end{itemize}
+%
+Podajte ustrezno spremenjena pravila za relacije operacijske semantike:
+\[
+  s, e \Downarrow n \qquad s, b \Downarrow r \qquad s, c \leadsto s', c'
+\]
+kjer sklad $s$ predstavimo s seznamom celih števil  $n_1 :\!: n_2 :\!: \cdots :\!: []$.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+Prostor Sierpinskega $\mathbb{S} = \{ \bot, \top \}$ delno uredimo z:
+\[
+    a \sqsubseteq b \iff (a = \bot) \lor (b = \top)
+\]
+Tedaj je $(\mathbb{S}, \sqsubseteq)$ domena, česar vam ni treba dokazovati.
+Definirajmo preslikavi $\mathsf{any}, \mathsf{all} : [\mathbb{N}_\bot \to \mathbb{S}] \to \mathbb{S}$ s predpisoma:
+\[
+  \mathsf{any}(f) = \begin{cases}
+    \top & \exists n \in \mathbb{N}. f(n) = \top \\
+    \bot & \text{sicer}
+  \end{cases}
+  \qquad
+  \mathsf{all}(f) = \begin{cases}
+    \top & \forall n \in \mathbb{N}. f(n) = \top \\
+    \bot & \text{sicer}
+  \end{cases}
+\]
+Pokažite, da je preslikava $\mathsf{any}$ zvezna, preslikava $\mathsf{all}$ pa ni.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\unit}{\mathtt{unit}}
+\newcommand{\return}[1]{\mathtt{return}\;#1}
+\newcommand{\letin}[1]{\mathtt{let}\;#1\;\mathtt{in}\;}
+\newcommand{\throw}[1]{\mathtt{throw}\;#1}
+\newcommand{\trywith}[3]{\mathtt{try}\;#1\;\mathtt{with}\;\{#2 \mapsto #3\}}
+\newcommand{\excs}{\mathcal{E}}
+\newcommand{\excto}[1]{\stackrel{#1}{\to}}
+
+Drobnozrnati neučakani $\lambda$-račun razširimo s sprožanjem in lovljenjem izjem $E$ iz vnaprej podane množice $\mathbb{E}$, kar določimo s sintakso:
+\begin{align*}
+  \text{vrednost $V$} &\bnfis
+  x
+  \bnfor \unt
+  \bnfor \fun{x} M
+  \\
+  \text{izračun $M, N$} &\bnfis
+  \return{V}
+  \bnfor \letin{x = M} N
+  \bnfor V_1 \, V_2
+  \bnfor \throw{E}
+  \bnfor \trywith{M}{E}{N}
+\end{align*}
+%
+in operacijsko semantiko:
+%
+\begin{mathpar}
+  \infer{M \leadsto M'}{
+    \letin{x = M} N \leadsto  \letin{x = M'} N
+  } \and
+  \infer{
+  }{
+    \letin{x = \return V} N \leadsto N[V / x]
+  } \and
+  \infer{
+  }{
+    \letin{x = \throw{E}} N \leadsto \throw{E}
+  } \and
+  \infer{
+  }{
+    (\lambda x. M) \, V  \leadsto  M[V / x]
+  } \and
+  \infer{M \leadsto M'}{
+    \trywith{M}{E}{N} \leadsto \trywith{M'}{E}{N}
+  } \and
+  \infer{
+  }{
+    \trywith{(\return V)}{E}{N} \leadsto \return V
+  } \and
+  \infer{
+  }{
+    \trywith{(\throw E)}{E}{N} \leadsto N
+  } \and
+  \infer{E \ne E'}{
+    \trywith{(\throw E)}{E'}{N} \leadsto \throw E
+  }
+\end{mathpar}
+%
+Namesto z običajnim sistemom tipov jezik opremimo s \emph{sistemom učinkov}, v katerem poleg tipov vrednosti sledimo tudi izjemam, ki jih lahko sprožajo programi.
+Tako sintakso tipov podamo z
+\[
+  \text{tip $A, B$} \bnfis
+  \unit
+  \bnfor A \excto{\excs} B\,,
+\]
+kjer tip $A \excto{\excs} B$ predstavlja funkcije iz $A$ v $B$, ki med izvajanjem lahko (morebiti) sprožijo eno izmed izjem iz podmnožice $\excs \subseteq \mathbb{E}$.
+Podobno pri pravilih za določanje tipov izračunom z relacijo $\Gamma \vdash_c M : A ! \excs$ priredimo tudi množico izjem~$\excs$, ki jih lahko sprožajo:
+%
+\begin{mathpar}
+  \infer{
+    (x : A) \in \Gamma
+  }{
+    \Gamma \vdash_v x : A
+  } \and
+  \infer{
+  }{
+    \Gamma \vdash_v \unt : \unit
+  } \and
+  \infer{
+    \Gamma, x : A \vdash_c M : B ! \excs
+  }{
+    \Gamma \vdash_v \lambda x. M : A \excto{\excs} B
+  } \\
+  \infer{
+    \Gamma \vdash_v V_1 : A \excto{\excs} B \and
+    \Gamma \vdash_v V_2 : A
+  }{
+    \Gamma \vdash_c V_1 \, V_2 : B ! \excs
+  } \and
+  \infer{
+    \Gamma \vdash_v V : A
+  }{
+    \Gamma \vdash_c \return V : A ! \excs
+  } \and
+  \infer{
+    \Gamma \vdash_c M : A ! \excs \and
+    \Gamma, x : A \vdash_c N : B ! \excs
+  }{
+    \Gamma \vdash_c \letin{x = M} N : B ! \excs
+  } \and
+  \infer{
+    E \in \excs
+  }{
+    \Gamma \vdash_c \throw{E} : A ! \excs
+  } \and
+  \infer{
+    \Gamma \vdash_c M : A ! \excs \cup \{E\} \and
+    \Gamma \vdash_c N : A ! \excs
+  }{
+    \Gamma \vdash_c \trywith{M}{E}{N} : A ! \excs
+  }
+\end{mathpar}
+%
+Za razširjeni jezik velja natančnejša trditev o napredku, ki vam ga \emph{ni treba} dokazovati: če velja $\vdash_c M : A ! \excs$, tedaj:
+\begin{itemize}
+  \item obstaja $V$, da velja $M = \return V$,
+  \item obstaja $E \in \excs$, da velja $M = \throw E$,
+  \item obstaja $M'$, da velja $M \leadsto M'$.
+\end{itemize}
+%
+Dokažite še ohranitev: če velja $\vdash_c M : A ! \excs$ in $M \leadsto M'$, tedaj velja $\vdash_c M' : A ! \excs$. Pri tem lahko predpostavite ustrezno lemo o substituciji.
+
+\nadaljevanje
+
+\end{document}
