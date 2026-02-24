@@ -18,7 +18,7 @@ let () =
   | [ _imp; "--ast"; filename ] ->
       filename |> parse_source |> Graphviz.ast_string |> print_endline
   | _ ->
-      let imp = Sys.executable_name in
-      failwith
-        (Printf.sprintf
-           "Run IMP as '%s <filename>.imp' or '%s --ast <filename>.imp'" imp imp)
+      let imp = "./imp.exe" in
+      Printf.eprintf
+        "Run IMP as '%s <filename>.imp' or '%s --ast <filename>.imp'" imp imp;
+      exit 1
