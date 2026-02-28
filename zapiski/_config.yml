@@ -4,6 +4,8 @@ repository:
   url: 'https://github.com/matijapretnar/teorija-programskih-jezikov'
   book_path: zapiski
   branch: zapiski
+execute:
+  execute_notebooks: "off"
 launch_buttons:
   binderhub_url: 'https://mybinder.org'
 sphinx:

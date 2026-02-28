@@ -41,7 +41,7 @@ Na vsakem koraku dobimo novo naravno število in obratno, vsak element $\mathbb{
 
 ### Aritmetični izrazi
 
-Podobno lahko mnnožico aritmetičnih izrazov $\mathbb{E}$, ki smo jo definirali že z BNF sintakso
+Podobno lahko množico aritmetičnih izrazov $\mathbb{E}$, ki smo jo definirali že z BNF sintakso
 
 $$
   e ::= n \ |\ e_1 + e_2 \ |\ e_1 * e_2 \ |\ -e,
@@ -57,7 +57,7 @@ definiramo tudi kot najmanjšo množico, ki:
 oziroma s pravili
 
 $$
-  \infer{}{n \in \mathbb{E}}(n \in \mathbb{N})
+  \infer{}{n \in \mathbb{E}}(n \in \mathbb{Z})
   \quad
   \infer{e_1 \in \mathbb{E}\quad e_2 \in \mathbb{E}}{e_1 + e_2 \in \mathbb{E}}
   \quad
@@ -66,7 +66,7 @@ $$
   \infer{e \in \mathbb{E}}{-e \in \mathbb{E}}
 $$
 
-Opazimo, da smo pri prvem pravilu $n \in \mathbb{N}$ zapisali kot stranski pogoj, saj je množica $\mathbb{N}$ že definirana in ni podana z napisanimi pravili.
+Opazimo, da smo pri prvem pravilu $n \in \mathbb{Z}$ zapisali kot stranski pogoj, saj je množica $\mathbb{Z}$ že definirana in ni podana z napisanimi pravili.
 
 Tudi tu vse elemente $\mathbb{E}$ dobimo tako, da končno mnogokrat uporabljamo pravila.
 
@@ -144,7 +144,7 @@ Ker so naravna števila dveh različnih oblik (nič oz. naslednik), bomo v konst
 V splošnem vsakemu pravilu ustreza en sumand v disjunktni vsoti, sestavljen iz množic, ki ustrezajo predpostavkam pravil. Recimo, pravilom za aritmetične izraze
 
 $$
-  \infer{}{n \in \mathbb{E}}(n \in \mathbb{N})
+  \infer{}{n \in \mathbb{E}}(n \in \mathbb{Z})
   \quad
   \infer{e_1 \in \mathbb{E}\quad e_2 \in \mathbb{E}}{e_1 + e_2 \in \mathbb{E}}
   \quad
@@ -156,7 +156,7 @@ $$
 ustreza preslikava
 
 $$
-  F X = \mathbb{N} + (X \times X) + (X \times X) + X
+  F X = \mathbb{Z} + (X \times X) + (X \times X) + X
 $$
 
 ### Konstrukcija množice iz preslikave
@@ -200,10 +200,10 @@ $$
   P(0) \land (\forall n \in \mathbb{N}. P(n) \Rightarrow P(n^+)) \implies \forall m \in \mathbb{N}. P(m)
 $$
 
-Za aritmetične izraze in $F X = \mathbb{N} + (X \times X) + (X \times X) + X$ podobno dobimo načelo indukcije
+Za aritmetične izraze in $F X = \mathbb{Z} + (X \times X) + (X \times X) + X$ podobno dobimo načelo indukcije
 
 $$\begin{aligned}
-  &(\forall n \in \mathbb{N} . P(n)) \\
+  &(\forall n \in \mathbb{Z} . P(n)) \\
   &\land (\forall e_1, e_2 \in \mathbb{E}. P(e_1) \land P(e_2) \Rightarrow P(e_1 + e_2)) \\
   &\land (\forall e_1, e_2 \in \mathbb{E}. P(e_1) \land P(e_2) \Rightarrow P(e_1 \ast e_2)) \\
   &\land (\forall e \in \mathbb{E}. P(e) \Rightarrow P(-e)) \\
