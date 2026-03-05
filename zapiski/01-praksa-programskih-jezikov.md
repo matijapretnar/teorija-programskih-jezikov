@@ -43,6 +43,7 @@ Konkretno sintakso običajno podajamo v [Backus-Naurovi obliki (BNF)](https://en
 
 ```text
 <simbol> ::= moznost1 | moznost2 | ...
+```
 
 kjer je vsaka izmed možnosti sestavljena iz enega ali več nizov ali drugih simbolov. Na primer, simbol za števko `<digit>` je lahko kateri koli izmed nizov `"0"`, `"1"`, …, `"9"`, številka pa je sestavljena iz ene ali več števk ter morebitnega predznaka:
 

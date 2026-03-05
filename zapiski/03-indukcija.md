@@ -41,7 +41,7 @@ Na vsakem koraku dobimo novo naravno število in obratno, vsak element $\mathbb{
 
 ### Aritmetični izrazi
 
-Podobno lahko mnnožico aritmetičnih izrazov $\mathbb{E}$, ki smo jo definirali že z BNF sintakso
+Podobno lahko množico aritmetičnih izrazov $\mathbb{E}$, ki smo jo definirali že z BNF sintakso
 
 $$
   e ::= n \ |\ e_1 + e_2 \ |\ e_1 * e_2 \ |\ -e,
