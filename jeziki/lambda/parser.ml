@@ -92,7 +92,14 @@ and exp1 chrs =
   one_of [ apply; exp0 ] chrs
 
 and exp0 chrs =
-  one_of [ (ident >>= fun x -> return (Syntax.Var x)); parens exp2 ] chrs
+  one_of
+    [
+      (ident >>= fun x -> return (Syntax.Var x));
+      word "Z" >> return Syntax.Zero;
+      word "S" >> return Syntax.Succ;
+      parens exp2;
+    ]
+    chrs
 
 let parse str =
   match str |> String.trim |> explode |> exp2 with

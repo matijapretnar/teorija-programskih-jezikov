@@ -7,14 +7,12 @@ let read_source filename =
 let () =
   match Array.to_list Sys.argv with
   | [ _lambda; filename ] ->
-    let source = read_source filename in
-    let e = Parser.parse source in
-    print_endline "MALI KORAKI:";
-    Interpreter.small_step e;
-    print_endline "VELIKI KORAKI:";
-    Interpreter.big_step e
+      let source = read_source filename in
+      let e = Parser.parse source in
+      print_endline "MALI KORAKI:";
+      Interpreter.small_step e;
+      print_endline "VELIKI KORAKI:";
+      Interpreter.big_step e
   | _ ->
       let lambda = Sys.executable_name in
-      failwith
-        (Printf.sprintf
-           "Run LAMBDA as '%s <filename>.lam'" lambda)
+      failwith (Printf.sprintf "Run LAMBDA as '%s <filename>.lam'" lambda)
