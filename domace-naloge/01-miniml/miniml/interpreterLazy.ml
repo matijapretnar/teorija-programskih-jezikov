@@ -26,13 +26,6 @@ let rec eval_exp = function
       | S.Bool true -> eval_exp e1
       | S.Bool false -> eval_exp e2
       | _ -> failwith "Boolean expected")
-  | S.Apply (e1, e2) -> (
-      let f = eval_exp e1 and v = eval_exp e2 in
-      match f with
-      | S.Lambda (x, e) -> eval_exp (S.subst_exp [ (x, v) ] e)
-      | S.RecLambda (f, x, e) as rec_f ->
-          eval_exp (S.subst_exp [ (f, rec_f); (x, v) ] e)
-      | _ -> failwith "Function expected")
   | _ -> failwith "TODO"
 
 and eval_int e =
@@ -43,7 +36,6 @@ let is_value = function
   | S.Var _ | S.Plus _ | S.Minus _ | S.Times _ | S.Equal _ | S.Less _
   | S.Greater _ | S.IfThenElse _ | S.Apply _ ->
       false
-  | _ -> failwith "TODO"
 
 let rec step = function
   | S.Var _ | S.Int _ | S.Bool _ | S.Lambda _ | S.RecLambda _ ->
@@ -68,11 +60,6 @@ let rec step = function
   | S.Greater (e1, e2) -> S.Greater (step e1, e2)
   | S.IfThenElse (S.Bool b, e1, e2) -> if b then e1 else e2
   | S.IfThenElse (e, e1, e2) -> S.IfThenElse (step e, e1, e2)
-  | S.Apply (S.Lambda (x, e), v) when is_value v -> S.subst_exp [ (x, v) ] e
-  | S.Apply ((S.RecLambda (f, x, e) as rec_f), v) when is_value v ->
-      S.subst_exp [ (f, rec_f); (x, v) ] e
-  | S.Apply (((S.Lambda _ | S.RecLambda _) as f), e) -> S.Apply (f, step e)
-  | S.Apply (e1, e2) -> S.Apply (step e1, e2)
   | _ -> failwith "TODO"
 
 let big_step e =

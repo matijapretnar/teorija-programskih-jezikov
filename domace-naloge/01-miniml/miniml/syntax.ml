@@ -1,42 +1,3 @@
-type param = Param of int
-
-let counter = ref 0
-
-let fresh_param () =
-  incr counter;
-  Param !counter
-
-type ty =
-  | IntTy
-  | BoolTy
-  | ArrowTy of ty * ty
-  | ParamTy of param
-  | ProdTy of ty * ty
-  | ListTy of ty
-
-let rec occurs p = function
-  | IntTy | BoolTy -> false
-  | ArrowTy (ty1, ty2) -> occurs p ty1 || occurs p ty2
-  | ParamTy p' -> p = p'
-  | _ -> failwith "TODO"
-
-let rec subst_ty sbst = function
-  | (IntTy | BoolTy) as ty -> ty
-  | ArrowTy (ty1, ty2) -> ArrowTy (subst_ty sbst ty1, subst_ty sbst ty2)
-  | ParamTy p as ty -> List.assoc_opt p sbst |> Option.value ~default:ty
-  | _ -> failwith "TODO"
-
-let fresh_ty () = ParamTy (fresh_param ())
-let string_of_param (Param p) = "'a" ^ string_of_int p
-
-let rec string_of_ty = function
-  | IntTy -> "int"
-  | BoolTy -> "bool"
-  | ArrowTy (ty1, ty2) ->
-      "(" ^ string_of_ty ty1 ^ " -> " ^ string_of_ty ty2 ^ ")"
-  | ParamTy p -> string_of_param p
-  | _ -> failwith "TODO"
-
 type ident = Ident of string
 
 type exp =
@@ -53,12 +14,6 @@ type exp =
   | Lambda of ident * exp
   | RecLambda of ident * ident * exp
   | Apply of exp * exp
-  | Pair of exp * exp
-  | Fst of exp
-  | Snd of exp
-  | Nil
-  | Cons of exp * exp
-  | Match of exp * exp * ident * ident * exp
 
 let let_in (x, e1, e2) = Apply (Lambda (x, e2), e1)
 let let_rec_in (f, x, e1, e2) = let_in (f, RecLambda (f, x, e1), e2)
@@ -82,7 +37,6 @@ let rec subst_exp sbst = function
       let sbst' = List.remove_assoc f (List.remove_assoc x sbst) in
       RecLambda (f, x, subst_exp sbst' e)
   | Apply (e1, e2) -> Apply (subst_exp sbst e1, subst_exp sbst e2)
-  | _ -> failwith "TODO"
 
 let string_of_ident (Ident x) = x
 

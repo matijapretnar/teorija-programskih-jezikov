@@ -17,10 +17,10 @@ let main () =
     let filename = Sys.argv.(2) in
     let source = read_source filename in
     let e = Parser.parse source in
-    Typechecker.check_type e;
     print_endline "MALI KORAKI: ";
     if eager then Interpreter.small_step e else InterpreterLazy.small_step e;
     print_endline "VELIKI KORAKI:";
     if eager then Interpreter.big_step e else InterpreterLazy.big_step e
 
 let _ = main ()
+
