@@ -14,6 +14,12 @@ type exp =
   | Lambda of ident * exp
   | RecLambda of ident * ident * exp
   | Apply of exp * exp
+  | Pair of exp * exp
+  | Fst of exp
+  | Snd of exp
+  | Nil
+  | Cons of exp * exp
+  | Match of exp * exp * ident * ident * exp
 
 let let_in (x, e1, e2) = Apply (Lambda (x, e2), e1)
 let let_rec_in (f, x, e1, e2) = let_in (f, RecLambda (f, x, e1), e2)
