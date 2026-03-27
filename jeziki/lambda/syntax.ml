@@ -28,18 +28,29 @@ let rec subst_exp sbst = function
 
 let string_of_ident (Ident x) = x
 
+let rec extract_numeral = function
+  | Zero -> Some 0
+  | Apply (Succ, e) -> (
+      match extract_numeral e with None -> None | Some n -> Some (n + 1))
+  | _ -> None
+
+let try_numeral fallback e =
+  match extract_numeral e with
+  | None -> fallback e
+  | Some n -> "_" ^ string_of_int n ^ "_"
+
 let rec string_of_exp2 = function
   | Lambda (x, e) -> "\\" ^ string_of_ident x ^ ". " ^ string_of_exp2 e
-  | e -> string_of_exp1 e
+  | e -> try_numeral string_of_exp1 e
 
 and string_of_exp1 = function
   | Apply (e1, e2) -> string_of_exp1 e1 ^ " " ^ string_of_exp0 e2
-  | e -> string_of_exp0 e
+  | e -> try_numeral string_of_exp0 e
 
 and string_of_exp0 = function
   | Var x -> string_of_ident x
   | Zero -> "Z"
   | Succ -> "S"
-  | e -> "(" ^ string_of_exp2 e ^ ")"
+  | e -> try_numeral (fun e -> "(" ^ string_of_exp2 e ^ ")") e
 
 let string_of_exp = string_of_exp2
