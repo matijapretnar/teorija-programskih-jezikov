@@ -201,21 +201,21 @@ $$
   I_0 = \emptyset \qquad I_{n + 1} = F I_n
 $$
 
-ter pokažimo, da je $I = \bigcup_{n = 0}^{\infty} I_n = \bigcup_{i = 1}^\infty F^i \emptyset = \mu F$ najmanjša množica, zaprta za $F$. Preverimo lahko, da $I_n$ vsebuje natanko tiste elemente, katerih drevo izpeljave ima globino kvečjemu $n$.
+ter pokažimo, da je $\mu F = \bigcup_{n = 0}^{\infty} I_n = \bigcup_{i = 1}^\infty F^i \emptyset = \mu F$ najmanjša množica, zaprta za $F$. Preverimo lahko, da $I_n$ vsebuje natanko tiste elemente, katerih drevo izpeljave ima globino kvečjemu $n$.
 
-Pokažimo najprej, da je $F I \subseteq I$. Ker je $F$ definirana z vrednostmi na končnih podmnožicah, velja
+Pokažimo najprej, da je $F \mu F \subseteq \mu F$. Ker je $F$ definirana z vrednostmi na končnih podmnožicah, velja
 
 $$
-  F I = \bigcup_{A \subseteq^{\text{končna}} I} F A
+  F \mu F = \bigcup_{A \subseteq^{\text{končna}} \mu F} F A
 $$
 
-Ker je $I = \bigcup_{n = 0}^{\infty} I_n$, za vsako končno $A \subseteq I$ obstaja tak $n$, da je $A \subseteq I_n$. Ker je $F$ monotona, je $F A \subseteq F I_n = I_{n + 1} \subseteq I$. Torej je tudi $\bigcup_{A \subseteq^{\text{končna}} I} F A \subseteq I$.
+Ker je $\mu F = \bigcup_{n = 0}^{\infty} I_n$, za vsako končno $A \subseteq \mu F$ obstaja tak $n$, da je $A \subseteq I_n$. Ker je $F$ monotona, je $F A \subseteq F I_n = I_{n + 1} \subseteq \mu F$. Torej je tudi $\bigcup_{A \subseteq^{\text{končna}} \mu F} F A \subseteq \mu F$.
 
-Vzemimo še množico $X$, da velja $F X \subseteq X$ ter pokažimo, da je $I \subseteq X$. Z indukcijo najprej pokažimo, da je $I_n \subseteq X$. Ker je $I_0 = \emptyset \subseteq X$, je osnovni korak trivialen. Sedaj predpostavimo, da velja $I_n \subseteq X$. Tedaj velja tudi $I_{n + 1} = F I_n \subseteq F X \subseteq X$, saj je preslikava $F$ monotona. Ker so vsi členi $I_n \subseteq X$, velja tudi $I = \bigcup_{n = 0}^{\infty} I_n \subseteq X$. ∎
+Vzemimo še množico $X$, da velja $F X \subseteq X$ ter pokažimo, da je $\mu F \subseteq X$. Z indukcijo najprej pokažimo, da je $I_n \subseteq X$. Ker je $I_0 = \emptyset \subseteq X$, je osnovni korak trivialen. Sedaj predpostavimo, da velja $I_n \subseteq X$. Tedaj velja tudi $I_{n + 1} = F I_n \subseteq F X \subseteq X$, saj je preslikava $F$ monotona. Ker so vsi členi $I_n \subseteq X$, velja tudi $\mu F = \bigcup_{n = 0}^{\infty} I_n \subseteq X$. ∎
 
 ### Dokazovanje z indukcijo
 
-To lastnost lahko uporabimo za _dokazovanje z indukcijo_. Vsak predikat $P$ na $I$ lahko predstavimo z množico $Q = \{ x \in I \mid P(x) \}$. Če velja $F Q \subseteq Q$, mora biti $Q = I$, saj je $I$ najmanjša množica, zaprta za $F$. Na primer, za $F X = 1 + X$ in $I = \mathbb{N}$ se trditev $F Q \subseteq Q$ prevede na $1 + Q \subseteq Q$. To pomeni, da mora veljati $\iota_1(\ast) \in Q$ ter $\iota_2(n) \in Q$ za vsak $n \in Q$. Prvi pogoj nam pove, da je $0 \in Q$, drugi pogoj pa, da iz $n \in Q$ sledi $n^+ \in Q$, kar je skupaj ravno običajno načelo indukcije
+To lastnost lahko uporabimo za _dokazovanje z indukcijo_. Vsak predikat $P$ na $\mu F$ lahko predstavimo z množico $Q = \{ x \in \mu F \mid P(x) \}$. Če velja $F Q \subseteq Q$, mora biti $Q = \mu F$, saj je $\mu F$ najmanjša množica, zaprta za $F$. Na primer, za $F X = 1 + X$ in $\mu F = \mathbb{N}$ se trditev $F Q \subseteq Q$ prevede na $1 + Q \subseteq Q$. To pomeni, da mora veljati $\iota_1(\ast) \in Q$ ter $\iota_2(n) \in Q$ za vsak $n \in Q$. Prvi pogoj nam pove, da je $0 \in Q$, drugi pogoj pa, da iz $n \in Q$ sledi $n^+ \in Q$, kar je skupaj ravno običajno načelo indukcije
 
 $$
   P(0) \land (\forall n \in \mathbb{N}. P(n) \Rightarrow P(n^+)) \implies \forall m \in \mathbb{N}. P(m)
@@ -230,3 +230,88 @@ $$\begin{aligned}
   &\land (\forall e \in \mathbb{E}. P(e) \Rightarrow P(-e)) \\
   &\implies \forall e \in \mathbb{E}. P(e)
 \end{aligned}$$
+
+### Strukturna rekurzija in algebre funktorjev
+
+Funkcije na induktivnih tipih običajno definiramo rekurzivno. Na primer, evalvacija aritmetičnih izrazov $\mathsf{ev} : \mathbb{E} \to \mathbb{Z}$ je podana kot:
+
+$$ \begin{align*}
+  \mathsf{ev}(\underline{n})
+    &= n \\
+  \mathsf{ev}(e_1 + e_2)
+    &= \mathsf{ev}(e_1) + \mathsf{ev}(e_2) \\
+  \mathsf{ev}(e_1 * e_2)
+    &= \mathsf{ev}(e_1) \cdot \mathsf{ev}(e_2)  \\
+  \mathsf{ev}(-e)
+    &= -\mathsf{ev}(e)
+\end{align*} $$
+
+V večini primerov uporabljamo _strukturno rekurzijo_, ki jo lahko razbijemo na: (1) rekurzivne klice na posameznih podizrazih in (2) operacije, s katerimi rezultate klicev združimo v končen rezultat. Na primer, vedenje funkcije $\mathsf{ev}$ lahko zapišemo kot:
+
+$$ \begin{align*}
+  \mathsf{ev}(\underline{n})
+    &= \alpha_1(n) \\
+  \mathsf{ev}(e_1 + e_2)
+    &= \alpha_2(\mathsf{ev}(e_1), \mathsf{ev}(e_2)) \\
+  \mathsf{ev}(e_1 * e_2)
+    &= \alpha_3(\mathsf{ev}(e_1), \mathsf{ev}(e_2))  \\
+  \mathsf{ev}(-e)
+    &= \alpha_4(\mathsf{ev}(e))
+\end{align*} $$
+
+kjer je:
+
+$$ \begin{align*}
+\alpha_1 &: \mathbb{N} \to \mathbb{Z} & \alpha_1(n) &= n \\
+\alpha_2 &: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} & \alpha_2(x, y) &= x + y \\
+\alpha_3 &: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} & \alpha_3(x, y) &= x \cdot y \\
+\alpha_4 &: \mathbb{Z} \to \mathbb{Z} & \alpha_4(x) &= -x \\
+\end{align*} $$
+
+Vemo, da lahko par funkcij iz $X \to Z$ in $Y \to Z$ ekvivalentno zapišemo kot funkcijo iz $X + Y \to Z$. Na enak način lahko zgornje funkcije zložimo v eno samo funkcijo:
+
+$$ \alpha : (\mathbb{N} + \mathbb{Z} \times \mathbb{Z} + \mathbb{Z} \times \mathbb{Z} + \mathbb{Z}) \to \mathbb{Z} $$
+
+v čemer prepoznamo $\alpha : F \mathbb{Z} \to \mathbb{Z}$.
+
+Splošen zapis z vrednostmi s tem preide na:
+
+$$ \begin{align*} \mathsf{ev}(\iota_1(n)) &= \alpha (\iota_1(n)) \\ \mathsf{ev}(\iota_2(\langle e_1, e_2\rangle)) &= \alpha (\iota_2(\langle\mathsf{ev}(e_1), \mathsf{ev}(e_2)\rangle)) \\ \mathsf{ev}(\iota_3(\langle e_1, e_2\rangle)) &= \alpha (\iota_3(\langle\mathsf{ev}(e_1), \mathsf{ev}(e_2)\rangle))  \\ \mathsf{ev}(\iota_4(e)) &= \alpha(\iota_4(\mathsf{ev}(e))) \end{align*} $$
+
+Če po pravilih za vsoto in produkt funktorjev razpišemo delovanje funktorja $F$ na preslikavi $f : X \to Y$, dobimo $F f : F X \to F Y$, ki deluje kot:
+
+$$ \begin{align*}
+  (F f)(\iota_1(n)) &= \iota_1(n) \\
+  (F f)(\iota_2(\langle x_1, x_2\rangle)) &= \iota_2(\langle f(x_1), f(x_2)\rangle) \\
+  (F f)(\iota_3(\langle x_1, x_2\rangle)) &= \iota_3(\langle f(x_1), f(x_2)\rangle)  \\
+  (F f)(\iota_4(x)) &= \iota_4(f(x))
+  \end{align*} $$
+
+Torej lahko zgornji sistem rekurzivnih enačb za $\mathsf{ev}$ na kratko zapišemo kot $\mathsf{ev} = \alpha \circ F\mathsf{ev}$. Ta konstrukcija je samo posledica splošne lastnosti, ki jo ima množica $\mu F$.
+
+**Definicija.** Naj bo $F$ funktor. Preslikavi $\alpha : F X \to X$ pravimo **algebra za $F$**. Pravimo, da je $f : X \to Y$ **homomorfizem** med algebrama $\alpha : F X \to X$ in $\beta : F Y \to Y$, če velja $f \circ \alpha = \beta \circ F f$.
+
+**Trditev.** Vzemimo funktor $F$, ki zadošča monotonosti in Scottovi zveznosti, ter naj bo $\mu F$ najmanjša množica, zaprta za ta funktor. Tedaj je $\mathrm{id} : F \mu F \to \mu F$ algebra za $F$. Še več, $\mu F$ je **začetna algebra** za $F$: za vsako algebro $\alpha : F X \to X$ obstaja **enoličen homomorfizem** $f : \mu F \to X$.
+
+_Dokaz._ Spomnimo se, da je $\mu F = \bigcup_{n = 0}^{\infty} I_n$, kjer je $I_0 = \emptyset$ in $I_{n + 1} = F I_n$. Prav tako velja $F \mu F = \mu F$, se pravi je identiteta res endomorfizem $\mathrm{id} : F \mu F \to \mu F$. Homomorfizem $f : \mu F \to X$ mora po definiciji zadoščati enačbi $f \circ \mathrm{id} = \alpha \circ F f$, oziroma $f = \alpha \circ F f$.
+
+Definirajmo zaporedje preslikav $f_n : I_n \to X$ z rekurzijo:
+
+- $f_0 : \emptyset \to X$ je edina možna prazna funkcija.
+- $f_{n + 1} : I_{n + 1} \to X$ definiramo kot kompozitum $f_{n+1} = \alpha \circ F f_n$. To smemo, ker je $I_{n + 1} = F I_n$ in tako po delovanju funktorja $F$ na preslikavi $f_n : I_n \to X$ dobimo $F f_n : F I_n \to F X$, nakar apliciramo $\alpha : F X \to X$.
+
+Z indukcijo zlahka preverimo, da se definiciji ujemata na presekih preslikav, se pravi $f_{n+1}|_{I_n} = f_n$. Osnovni korak (zožitev na prazno množico $I_0$) je trivialen. Za induktivni korak pa velja:
+$$ f_{n+2}|_{I_{n+1}} = (\alpha \circ F f_{n+1})|_{F I_n} = \alpha \circ F (f_{n+1}|_{I_n}) = \alpha \circ F f_n = f_{n+1} $$
+S tem lahko zberemo vse preslikave in definiramo enotno preslikavo $f : \mu F \to X$, za katero bo veljalo $f|_{I_n} = f_n$. Preslikava $f$ na vseh množicah $I_{n+1}$ zadošča zvezi
+
+$$ f|_{I_{n+1}} = f_{n+1} = \alpha \circ F f_n = \alpha \circ F (f|_{I_n}) = (\alpha \circ F f)|_{F I_n} = (\alpha \circ F f)|_{I_{n+1}} $$
+
+(na $I_0 = \emptyset$ pa gre trivialno za prazni funkciji), zato velja tudi $f = \alpha \circ F f$.
+
+Preveriti moramo še enoličnost izbire $f$. Predpostavimo, da obstaja še kakšen homomorfizem $g : \mu F \to X$, da velja $g = \alpha \circ F g$. Z indukcijo dokažimo, da je $g|_{I_n} = f_n$.
+
+- Za $n = 0$ trivialno velja $g|_{I_0} = f_0 : \emptyset \to X$.
+- Za induktivni korak predpostavimo $g|_{I_n} = f_n$. Potem je
+  $$ g|_{I_{n+1}} = g|_{F I_n} = (\alpha \circ F g)|_{F I_n} = \alpha \circ F (g|_{I_n}) = \alpha \circ F f_n = f_{n+1} $$
+
+Ker se $g$ in $f$ ujemata na vsakem $I_n$, se ujemata tudi na celi množici $\mu F = \bigcup_{n = 0}^{\infty} I_n$. S tem je dokaz zaključen. ∎
