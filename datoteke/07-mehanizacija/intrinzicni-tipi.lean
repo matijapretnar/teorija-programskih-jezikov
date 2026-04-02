@@ -2,13 +2,15 @@ inductive Ty : Type where
 | Bul : Ty
 | Fun : Ty → Ty → Ty
 
+notation:25 A " ⇒ " B => Ty.Fun A B
+
 inductive Ctx : Type where
 | empty : Ctx
 | snoc : Ctx → Ty → Ctx
 
 inductive Var : Ctx → Ty -> Type where
-| here : Var (Ctx.snoc _ A) A
-| there :
+| Z : Var (Ctx.snoc _ A) A
+| S :
     Var Γ A →
     --------------------
     Var (Ctx.snoc Γ _) A
@@ -25,12 +27,12 @@ inductive Tm : Ctx -> Ty -> Type where
     -- λf².λg¹.λx⁰.f (g x)
     -- λ.λ.λ.2 (1 0)
 
--- example {A B C} : Tm Ctx.empty sorry :=
---     open Tm in
---     open Var in
---     lam ( lam ( lam (
---         app (var (there (there here))) (app (var (there here)) (var here))
---     )))
+example {A B C} : Tm Ctx.empty ((B ⇒ C) ⇒ (A ⇒ B) ⇒ (A ⇒ C)) :=
+    open Tm in
+    open Var in
+    lam ( lam ( lam (
+        app (var (S (S Z))) (app (var (S Z)) (var Z))
+    )))
 
 
 -- def subst (x : Nat) (V : Tm) : Tm → Tm
