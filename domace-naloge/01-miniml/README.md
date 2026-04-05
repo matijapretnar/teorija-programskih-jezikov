@@ -12,7 +12,7 @@ Za izgradnjo jezika v konzoli pojdite do mape `domace-naloge/01-minimal/miniml` 
 Če na računalniku nimate nameščenega orodja dune, lahko program prevedete tudi z
 
 ```
-ocamlc -g syntax.ml parser.ml interpreter.ml interpreterLazy.ml typechecker.ml miniml.ml -o miniml.exe
+ocamlc -g syntax.ml parser.ml interpreter.ml interpreterLazy.ml miniml.ml -o miniml.exe
 ```
 
 Če ste si OCaml namestili na sistemu Windows s pomočjo `fdopen` namesto `ocamlc` uporabite (kjer pot do ocamlc ustrezno zamenjate z veljavno potjo na vašem računalniku):
