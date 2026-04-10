@@ -7,6 +7,7 @@ Cilj domače naloge so izključno razširitve jezika, zato pri karkšnihkoli pro
 Za pomoč pri pisanju naloge je nekaj primerov uporabe novih konstruktov že podanih, predlagamo pa, da dodate tudi svoje.
 
 ### Izgradnja
+
 Za izgradnjo jezika v konzoli pojdite do mape `domace-naloge/01-minimal/miniml` in v njej poženite `dune build`.
 
 Če na računalniku nimate nameščenega orodja dune, lahko program prevedete tudi z
@@ -54,7 +55,6 @@ Vaša naloga je:
 
 ## Oddaja
 
-Datoteke domače naloge morate oddati prek spletne učilnice.
-Priporočamo, da nalogo vseeno pišete prek Gita, vendar v ločenem in zasebnem repozitoriju, da je ne bi kdo prepisal brez vaše vednosti.
+Datoteke domače naloge morate oddati prek spletne učilnice. Priporočamo, da nalogo vseeno pišete prek Gita, vendar v ločenem in zasebnem repozitoriju, da je ne bi kdo prepisal brez vaše vednosti.
 
 **NALOGO MORATE REŠEVATI SAMOSTOJNO! ČE NE VESTE, ALI DOLOČENA STVAR POMENI SODELOVANJE, RAJE VPRAŠAJTE!**
