@@ -1,5 +1,5 @@
 LET REC jesodo n =
-    IF n = 0 THEN TRUE 
+    IF n = 0 THEN TRUE
     ELSE IF n = 1 THEN FALSE
     ELSE jesodo (n - 2)
 IN
