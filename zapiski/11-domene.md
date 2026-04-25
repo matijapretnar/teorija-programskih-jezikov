@@ -20,7 +20,7 @@ $$
     \itp{(\kwdpre{rec} f \, x . f \, x + \intsym{1}) \, \intsym{0}} = \itp{(\kwdpre{rec} f \, x . f \, x + \intsym{1}) \, \intsym{0}} + 1
 $$
 
-kar seveda ni res. V splošnem pa nam enačba pove, da ima (malo preurejeni) $\itp{M}$ vedno fiksno točko. To za množice in preslikave med njimi seveda ne velja. Smo pa fiksne točke že konstruirali v poglavju o indukciji, kjer smo imeli monotono preslikavo na množicah $F$, ki smo jo iterirali na prazni množici $\emptyset$, da smo dobili množico $I = \bigcup_{n = 0}^{\infty} F^i(\emptyset)$, za katero je veljalo $F I = I$. Podoben postopek želimo narediti v splošnem, kar nas pripelje do definicije _domen_.
+kar seveda ni res. V splošnem pa nam enačba pove, da ima (malo preurejeni) $\itp{M}$ vedno fiksno točko. To za množice in preslikave med njimi seveda ne velja. Smo pa fiksne točke že konstruirali v poglavju o indukciji, kjer smo imeli monotono preslikavo $F$ na množicah, ki smo jo iterirali na prazni množici $\emptyset$, da smo dobili množico $I = \bigcup_{n = 0}^{\infty} F^i(\emptyset)$, za katero je veljalo $F I = I$. Podoben postopek želimo narediti v splošnem, kar nas pripelje do definicije _domen_.
 
 ## Domene
 
