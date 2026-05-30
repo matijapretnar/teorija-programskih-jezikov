@@ -190,7 +190,7 @@ Vsak del dokažemo z indukcijo.
 
 Opazimo lahko, da v dokazu napredka za ukaze ne uporabimo druge množice lokacij $L'$. Ta pride v poštev, če želimo narediti več kot en korak.
 
-### Varnost
+### Ohranitev
 
 Vzemimo ukaza $c, c'$, množici lokacij $L, L'$ ter stanji $s, s'$, tako da:
 
