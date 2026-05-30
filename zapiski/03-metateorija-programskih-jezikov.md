@@ -177,7 +177,7 @@ Vsak del dokažemo z indukcijo.
 
   - Podoben dokaz lahko naredimo v primeru $L \vdash \whiledo{b}{c}, L'$.
 
-  - Če smo uporabili pravilo $\infer{L \vdash c_1, L' \qquad L' \vdash c_2, L''}{L \vdash (c_1 ; c_2), L''}$, po indukcijski predpostavki za $L \vdash c_1$ velja:
+  - Če smo uporabili pravilo $\infer{L \vdash c_1, L' \qquad L' \vdash c_2, L''}{L \vdash (c_1 ; c_2), L''}$, po indukcijski predpostavki za $L \vdash c_1, L'$ velja:
 
     1. bodisi obstajata ukaz $c_1'$ in stanje $s'$, da velja $s, c_1 \leadsto s', c_1'$, zaradi česar velja tudi $s, (c_1; c_2) \leadsto s', (c_1'; c_2)$,
     2. bodisi je $c_1 = \skip$, zaradi česar velja $s, (\skip; c_2) \leadsto s, c_2$.
