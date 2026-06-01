@@ -193,9 +193,9 @@ $$
     \itp{M_1}(\gamma) & \itp{V}(\gamma) = \ttt \\
     \itp{M_2}(\gamma) & \itp{V}(\gamma) = \fff
   \end{cases} \\
-\itp{\Gamma \vdash_v V_1 + V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) + \itp{V_2}(\gamma)) \\
-\itp{\Gamma \vdash_v V_1 * V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) \cdot \itp{V_2}(\gamma)) \\
-\itp{\Gamma \vdash_v V_1 < V_2 : \boolty}(\gamma) &=
+\itp{\Gamma \vdash_c V_1 + V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) + \itp{V_2}(\gamma)) \\
+\itp{\Gamma \vdash_c V_1 * V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) \cdot \itp{V_2}(\gamma)) \\
+\itp{\Gamma \vdash_c V_1 < V_2 : \boolty}(\gamma) &=
   \begin{cases}
     \eta(\ttt) & \itp{V_1}(\gamma) < \itp{V_2}(\gamma) \\
     \eta(\fff) & \text{sicer}
