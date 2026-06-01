@@ -155,7 +155,7 @@ $$
     \begin{align*}
     \itp{\boolty} &= \mathbb{B} = \{ \ttt, \fff \} \\
     \itp{\intty} &= \mathbb{Z} \\
-    \itp{A \to B} &= \itp{B}^{\itp{A}}
+    \itp{A \to B} &= \itp{B}^{T \itp{A}} = \itp{A} \to T \itp{B}
     \end{align*}
 $$
 
