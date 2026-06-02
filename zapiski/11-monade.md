@@ -202,7 +202,7 @@ $$
   \end{cases} \\
 \itp{\Gamma \vdash_c V_1 \, V_2 : B}(\gamma) &= \big(\itp{V_1}(\gamma)\big)\big(\itp{V_2}(\gamma)\big) \\
 \itp{\Gamma \vdash_c \return V : A}(\gamma) &= \eta(\itp{V}(\gamma)) \\
-\itp{\Gamma \vdash_c \letin{x = M} N : A}(\gamma) &= \itp{M}(\gamma) \bind (a \mapsto \itp{N}(\gamma, a))
+\itp{\Gamma \vdash_c \letin{x = M} N : A}(\gamma) &= \itp{\Gamma \vdash_c M : B}(\gamma) \bind (a \mapsto \itp{\Gamma, x : B \vdash_c N : A}(\gamma, a))
 \end{align*}
 $$
 
