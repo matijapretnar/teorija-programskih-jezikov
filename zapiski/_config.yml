@@ -42,4 +42,5 @@ sphinx:
           "bind": "\\mathop{>\\!\\!\\!>\\!\\!\\!=}"
           "just": "\\kwdpre{Just}"
           "nothing": "\\kwdpre{Nothing}"
+          "op": "\\mathrm{op}"
 
