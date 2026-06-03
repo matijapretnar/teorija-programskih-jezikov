@@ -12,7 +12,7 @@ jupyter-book build zapiski
 
 Zapiski sicer uporabljajo Jupyter book v1 (Sphinx).
 ```bash
-pipx install "jupyter-book<2"
+pip install "jupyter-book<2"
 ```
 
 Hkrati imamo ponekod evaluacijo OCaml kode, za katero z opam naložite še `jupyter` paket.
@@ -26,6 +26,8 @@ Preverite, da je jedro vključeno.
 ```bash
 jupyter kernelspec list
 ```
+Če s tem ne želite izgubljati časa, lahko v `zapiski/_config.yml` odkomentirate vrstici z `execute`.
+
 
 Zapiski uporabljajo lokalno kopijo Mathjaxa, zato da delujejo tudi brez spleta.
 V ta namen ga je treba najprej spraviti v `zapiski/_static`. To naredimo eksplicitno z
