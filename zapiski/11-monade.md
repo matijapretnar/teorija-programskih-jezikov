@@ -155,7 +155,7 @@ $$
     \begin{align*}
     \itp{\boolty} &= \mathbb{B} = \{ \ttt, \fff \} \\
     \itp{\intty} &= \mathbb{Z} \\
-    \itp{A \to B} &= \itp{B}^{\itp{A}}
+    \itp{A \to B} &= \itp{B}^{T \itp{A}} = \itp{A} \to T \itp{B}
     \end{align*}
 $$
 
@@ -193,16 +193,16 @@ $$
     \itp{M_1}(\gamma) & \itp{V}(\gamma) = \ttt \\
     \itp{M_2}(\gamma) & \itp{V}(\gamma) = \fff
   \end{cases} \\
-\itp{\Gamma \vdash_v V_1 + V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) + \itp{V_2}(\gamma)) \\
-\itp{\Gamma \vdash_v V_1 * V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) \cdot \itp{V_2}(\gamma)) \\
-\itp{\Gamma \vdash_v V_1 < V_2 : \boolty}(\gamma) &=
+\itp{\Gamma \vdash_c V_1 + V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) + \itp{V_2}(\gamma)) \\
+\itp{\Gamma \vdash_c V_1 * V_2 : \intty}(\gamma) &= \eta(\itp{V_1}(\gamma) \cdot \itp{V_2}(\gamma)) \\
+\itp{\Gamma \vdash_c V_1 < V_2 : \boolty}(\gamma) &=
   \begin{cases}
     \eta(\ttt) & \itp{V_1}(\gamma) < \itp{V_2}(\gamma) \\
     \eta(\fff) & \text{sicer}
   \end{cases} \\
 \itp{\Gamma \vdash_c V_1 \, V_2 : B}(\gamma) &= \big(\itp{V_1}(\gamma)\big)\big(\itp{V_2}(\gamma)\big) \\
 \itp{\Gamma \vdash_c \return V : A}(\gamma) &= \eta(\itp{V}(\gamma)) \\
-\itp{\Gamma \vdash_c \letin{x = M} N : A}(\gamma) &= \itp{M}(\gamma) \bind (a \mapsto \itp{N}(\gamma, a))
+\itp{\Gamma \vdash_c \letin{x = M} N : A}(\gamma) &= \itp{\Gamma \vdash_c M : B}(\gamma) \bind (a \mapsto \itp{\Gamma, x : B \vdash_c N : A}(\gamma, a))
 \end{align*}
 $$
 
