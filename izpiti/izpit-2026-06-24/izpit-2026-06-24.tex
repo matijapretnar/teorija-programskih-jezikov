@@ -1,0 +1,169 @@
+\documentclass[arhiv]{../izpit}
+\usepackage{amssymb}
+\usepackage{fouriernc}
+\usepackage{mathpartir}
+\usepackage{stmaryrd}
+
+\begin{document}
+
+\newcommand{\bnfis}{\mathrel{{:}{:}{=}}}
+\newcommand{\bnfor}{\;\mid\;}
+\newcommand{\fun}[2]{\lambda #1.\, #2}
+\newcommand{\conditional}[3]{\mathtt{if}\;#1\;\mathtt{then}\;#2\;\mathtt{else}\;#3}
+\newcommand{\boolty}{\mathtt{bool}}
+\newcommand{\intty}{\mathtt{int}}
+\newcommand{\unitty}{\mathtt{unit}}
+\newcommand{\tru}{\mathtt{true}}
+\newcommand{\fls}{\mathtt{false}}
+\newcommand{\unt}{\hbox{\texttt{()}}}
+\newcommand{\imp}{\textsc{Imp}}
+\newcommand{\intsym}[1]{\underline{#1}}
+\newcommand{\pair}[2]{\langle #1, #2\rangle}
+\newcommand{\fstcmd}{\mathtt{fst}\;}
+\newcommand{\sndcmd}{\mathtt{snd}\;}
+\newcommand{\inlcmd}{\mathtt{inl}\;}
+\newcommand{\inrcmd}{\mathtt{inr}\;}
+\newcommand{\caseof}[5]{\mathtt{case}\;#1\;\mathtt{of}\;\mathtt{inl}\,#2 \Rightarrow #3 \bnfor \mathtt{inr}\,#4 \Rightarrow #5}
+\newcommand{\Nbar}{\overline{\mathbb{N}}}
+\newcommand{\fold}[1]{\mathtt{fold}(#1)}
+\makeatletter
+\newcommand{\nadaljevanje}{\dodatek{\newpage\noindent\emph{(\@sloeng{nadaljevanje rešitve \arabic{naloga}. naloge}{continuation of the answer to question \arabic{naloga}})}}}
+\makeatother
+
+\izpit
+  [ucilnica=P02,naloge=-1]{Teorija programskih jezikov: 2. izpit}{24.\ junij 2026}{
+}
+\dodatek{
+  \vspace{\stretch{1}}
+  \begin{itemize}
+    \item \textbf{Ne odpirajte} te pole, dokler ne dobite dovoljenja.
+    \item Zgoraj \textbf{vpišite svoje podatke} in označite \textbf{sedež}.
+    \item Na vidno mesto položite \textbf{dokument s sliko}.
+    \item Preverite, da imate \textbf{telefon izklopljen} in spravljen.
+    \item Čas pisanja je \textbf{180 minut}.
+    \item Doseči je možno \textbf{80 točk}.
+    \item Veliko uspeha!
+  \end{itemize}
+  \vspace{\stretch{3}}
+  \newpage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+Vzemimo $\lambda$-račun z \emph{neučakano} semantiko \emph{malih korakov} ter običajno razširitvijo s produkti in vsotami.
+
+\podnaloga
+Zapišite drevo izpeljave za
+\[
+  \vdash \caseof{(\inrcmd \pair{\intsym{3}}{\intsym{14}})}{x}{x}{q}{\fstcmd q * \sndcmd q} : \intty.
+\]
+
+\podnaloga
+Zapišite vse korake v evalvaciji:
+\[
+  \caseof{(\inrcmd \pair{\intsym{3}}{\intsym{14}})}{x}{x}{q}{\fstcmd q * \sndcmd q}
+  \quad\leadsto^*\quad
+  \intsym{42}.
+\]
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+Uredimo množico $\Nbar = \mathbb{N} \cup \{\infty\}$ z linearno ureditvijo
+\[
+  0 \le 1 \le 2 \le \cdots \le \infty,
+\]
+v kateri je $\infty$ večji od vseh naravnih števil. Tedaj je $(\Nbar, \le)$ domena, česar vam ni treba dokazovati.
+
+\podnaloga
+Vzemimo preslikavi $f, g : \Nbar \to \Nbar$, podani s predpisom
+\[
+  f(n) = \begin{cases}
+    0 & n \in \mathbb{N} \\
+    1 & n = \infty
+  \end{cases}
+  \qquad
+  g(n) = \begin{cases}
+    n + 1 & n \in \mathbb{N} \\
+    \infty & n = \infty
+  \end{cases}
+\]
+Pokažite, da $f$ ni zvezna, $g$ pa je.
+
+\podnaloga
+Naj bo $h : \Nbar \to \Nbar$ poljubna monotona preslikava. Dokažite, da je $h$ zvezna natanko tedaj, ko velja
+\[
+  h(\infty) = \bigvee_{n \in \mathbb{N}} h(n).
+\]
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+
+\newcommand{\matchexpr}[2]{\mathtt{match}\;#1\;\mathtt{with}\;#2}
+
+$\lambda$-račun z \emph{neučakano} semantiko \emph{malih korakov} ter s produkti in vsotami (kot v 1.~nalogi) razširimo z \emph{ujemanjem vzorcev}. Vzorce podamo s sintakso
+\[
+  \text{vzorec } p \bnfis x \bnfor \pair{p_1}{p_2} \bnfor \inlcmd p \bnfor \inrcmd p,
+\]
+izraze pa razširimo z ujemanjem
+\[
+  M \bnfis \cdots \bnfor \matchexpr{M}{[\,p_1 \Rightarrow N_1 \bnfor \cdots \bnfor p_n \Rightarrow N_n\,]}.
+\]
+Ta izraz najprej evalvira $M$ v vrednost, nato pa po vrsti preizkuša veje in nadaljuje s telesom $N_i$ prve veje, katere vzorec $p_i$ se ujame z dobljeno vrednostjo; pri tem se spremenljivke vzorca $p_i$ vežejo na ustrezne podizraze vrednosti.
+
+\podnaloga
+Zapišite dodatna pravila za semantiko malih korakov izraza
+$\matchexpr{M}{\cdots}$, da bo veljalo:
+\begin{align*}
+  &\matchexpr{(\inrcmd \pair{\intsym{3}}{\intsym{14}})}{[\,\inlcmd x \Rightarrow x \bnfor \inrcmd \pair{a}{b} \Rightarrow a * b\,]} \\
+  &\leadsto
+  \matchexpr{(\inrcmd \pair{\intsym{3}}{\intsym{14}})}{[\inrcmd \pair{a}{b} \Rightarrow a * b\,]} \\
+  &\leadsto
+  3 * 14 \leadsto 42
+\end{align*}
+Pri tem si lahko pomagate z relacijama ujemanja $V / p \Downarrow s$ in neujemanja $V / p \Uparrow$. Prva pove, da vrednost~$V$ ustreza vzorcu~$p$ in pri tem nastane okolje $s = x_1 \mapsto V_1, \dots, x_k \mapsto V_k$,ki spremenljivkam vzorca priredi vrednosti. Druga pa, da se $V$ z vzorcem~$p$ \emph{ne} ujame. 
+
+\podnaloga
+Vpeljite pomožno relacijo $p : A \dashv \Delta$, ki pove, da se vzorec~$p$ ujema z vrednostmi tipa~$A$ in pri tem veže spremenljivke iz konteksta~$\Delta$. Zapišite pravila zanjo ter pravilo za določanje tipa izraza $\matchexpr{M}{\cdots}$.
+
+\podnaloga
+Za razširjeni jezik dokažite \emph{ohranitev}. Pri dokazu lahko uporabite \emph{lemo o
+ujemanju} (ki jo morate ravno tako dokazati): če velja $\vdash V : A$,
+$p : A \dashv \Delta$ in $V / p \Downarrow s$, potem velja $\vdash s(x)
+: B$ za vsak $(x : B) \in \Delta$.
+
+\nadaljevanje
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\naloga[\tocke{20}]
+\newcommand{\listty}[1]{#1^*}
+
+Naj bo $A$ poljubna množica in $F_A$ funktor, podan s predpisom $F_A X = 1 + A \times X$ (na preslikavah $F_A h = \mathrm{id}_1 + \mathrm{id}_A \times h$). Spomnimo se, da je začetna algebra $\mu F_A = \listty A$, torej množica končnih seznamov elementov iz $A$, in s $\fold{\alpha} : \listty A \to X$ označimo enoličen homomorfizem v algebro $\alpha : F_A X \to X$.
+
+\podnaloga
+Podajte algebri, za kateri kot pripadajoča homomorfizma dobimo dolžino seznama $\mathtt{length} : \listty A \to \mathbb{N}$ ter preslikovanje elementov seznama $\mathtt{map}\,f : \listty A \to \listty B$ (za nek $f : A \to B$).
+
+\podnaloga
+Dokažite \emph{zakon zlitja}: za poljuben homomorfizem $h : X \to Y$ med algebrama $\alpha : F X \to X$ ter {$\beta : F Y \to Y$} velja
+\[
+  h \circ \fold{\alpha} = \fold{\beta}.
+\]
+
+\podnaloga
+S pomočjo zakona zlitja (in \emph{brez} uporabe indukcije) dokažite, da za vsak $f : A \to B$ velja
+\[
+  \mathtt{length}_B \circ \mathtt{map}\,f = \mathtt{length}_A.
+\]
+
+\nadaljevanje
+
+\end{document}
